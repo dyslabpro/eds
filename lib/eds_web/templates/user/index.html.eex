@@ -1,0 +1,54 @@
+<h2>Listing Users</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Handle</th>
+      <th>Facebook handle</th>
+      <th>Google handle</th>
+      <th>Twitter handle</th>
+      <th>Website</th>
+      <th>Auth token</th>
+      <th>Auth token expires at</th>
+      <th>Joined at</th>
+      <th>Signed in at</th>
+      <th>Admin</th>
+      <th>Teacher</th>
+      <th>Student</th>
+      <th>Avatar</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for user <- @users do %>
+    <tr>
+      <td><%= user.name %></td>
+      <td><%= user.email %></td>
+      <td><%= user.handle %></td>
+      <td><%= user.facebook_handle %></td>
+      <td><%= user.google_handle %></td>
+      <td><%= user.twitter_handle %></td>
+      <td><%= user.website %></td>
+      <td><%= user.auth_token %></td>
+      <td><%= user.auth_token_expires_at %></td>
+      <td><%= user.joined_at %></td>
+      <td><%= user.signed_in_at %></td>
+      <td><%= user.admin %></td>
+      <td><%= user.teacher %></td>
+      <td><%= user.student %></td>
+      <td><%= user.avatar %></td>
+
+      <td class="text-right">
+        <span><%= link "Show", to: user_path(@conn, :show, user), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: user_path(@conn, :edit, user), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: user_path(@conn, :delete, user), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New User", to: user_path(@conn, :new) %></span>

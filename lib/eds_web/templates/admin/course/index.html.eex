@@ -1,0 +1,8 @@
+
+<span><%= link "New Course", to: admin_course_path(@conn, :new) %></span>
+<h2>Listing Courses</h2>
+<ul class="list-group">
+  <%= for course <- @courses do %>
+    <li class="list-group-item"><%= link course.title, to: admin_course_path(@conn, :show, course), class: "btn btn-default btn-xs" %></li>
+  <% end %>
+</ul>

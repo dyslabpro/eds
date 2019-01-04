@@ -1,0 +1,34 @@
+<h2>Show Course</h2>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @course.title %>
+  </li>
+
+  <li>
+    <strong>Subtitle:</strong>
+    <%= @course.subtitle %>
+  </li>
+</ul>
+
+<ul>
+  <%= for chapter <- @chapters do %>
+    <li><%= link chapter.title, to: course_chapter_path(@conn, :show, @course.id, chapter.id) %>
+      <ul>
+        
+      </ul>
+    </li>
+  <% end %>
+</ul>
+
+<ul>
+  <%= for category <- @course.categories do %>
+    <li><%= category.title %></li>
+  <% end %>
+</ul>
+
+
+<span><%= link "Edit", to: course_path(@conn, :edit, @course) %></span>
+<span><%= link "Back", to: course_path(@conn, :index) %></span>

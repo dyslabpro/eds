@@ -1,0 +1,24 @@
+<h2>Listing Chapters</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for chapter <- @chapters do %>
+    <tr>
+      <td><%= chapter.title %></td>
+
+      <td class="text-right">
+        <span><%= link "Show", to: admin_course_chapter_path(@conn, :show, chapter), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: admin_course_chapter_path(@conn, :edit, chapter), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: admin_course_chapter_path(@conn, :delete, chapter), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

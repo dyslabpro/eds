@@ -1,0 +1,11 @@
+<h2>Show Chapter</h2>
+
+<ul>
+
+  <li><strong>Title:</strong><%= @chapter.title %></li>
+  <%= for section <- @sections do %>
+    <li><%= link section.title, to: course_chapter_section_path(@conn, :show, @chapter.course_id, @chapter.id, section.id) %></li>
+  <% end %>
+  <li><%= link "New Section", to: admin_course_chapter_section_path(@conn, :new, @chapter.course_id, @chapter.id) %></li>
+</ul>
+
