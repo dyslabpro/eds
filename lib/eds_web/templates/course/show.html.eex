@@ -1,17 +1,6 @@
-<h2>Show Course</h2>
+<h2><%= @course.title %></h2>
+<h4><%= @course.subtitle %></h4>
 
-<ul>
-
-  <li>
-    <strong>Title:</strong>
-    <%= @course.title %>
-  </li>
-
-  <li>
-    <strong>Subtitle:</strong>
-    <%= @course.subtitle %>
-  </li>
-</ul>
 
 <ul>
   <%= for chapter <- @chapters do %>

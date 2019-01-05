@@ -12,13 +12,14 @@
 import Ecto.Query
 import Eds.Factory
 require Logger
-require IEx
 
 alias Eds.Repo
 alias Eds.Core.{Course, Chapter, Section, Category}
 alias Eds.Accounts.{User, UserCourse}
 
 Eds.Repo.delete_all(Eds.Core.CourseCategory)
+Eds.Repo.delete_all(Eds.Content.Text)
+Eds.Repo.delete_all(Eds.Content.Node)
 
 Eds.Repo.delete_all(Eds.Core.Category)
 Eds.Repo.delete_all(Eds.Core.Section)
@@ -28,6 +29,7 @@ Eds.Repo.delete_all(Eds.Core.Chapter)
 Eds.Repo.delete_all(Eds.Accounts.UserCourse)
 Eds.Repo.delete_all(Eds.Accounts.User)
 Eds.Repo.delete_all(Eds.Core.Course)
+
 
 
 # Users
@@ -58,6 +60,9 @@ courses = insert_list(100, :course)
 admins = insert_list(15, :admin)
 students = insert_list(15, :student)
 course_categories = insert_list(200, :course_categories)
+user_course = insert_list(200, :user_course)
+
+
 
 
 

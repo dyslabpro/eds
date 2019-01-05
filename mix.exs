@@ -44,8 +44,8 @@ defmodule Eds.Mixfile do
       {:ueberauth_facebook, "~> 0.7"},
       {:timex, "~> 3.0"},
       {:timex_ecto, "~> 3.0"},
-      {:ex_machina, "~> 2.1"},
-      {:faker, "~> 0.9", only: [:dev, :test]}
+      {:ex_machina, "~> 2.1", only: [:dev, :test]},
+      {:faker, "~> 0.11", only: [:dev, :test]}
     ]
   end
 

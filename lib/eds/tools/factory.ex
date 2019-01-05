@@ -3,16 +3,17 @@ defmodule Eds.Factory do
 
   def category_factory do
     %Eds.Core.Category{
-      title: sequence(:title, &"Category #{&1}")
+      title: Faker.Industry.En.industry
     }
   end
 
   def course_factory do
     %Eds.Core.Course{
-      description: Faker.Lorem.sentence(%Range{first: 1, last: 10}),
-      subtitle: sequence(:subtitle, &"subtitle #{&1}"),
-      title: sequence(:title, &"Course #{&1}"),
-      chapters: build_list(Enum.random(3..7), :chapter)
+      description: Faker.Lorem.paragraph(1..2),
+      subtitle: Faker.Lorem.sentence(1..2),
+      title: Faker.Lorem.sentence(1..2),
+      chapters: build_list(Enum.random(3..7), :chapter),
+      nodes: build_list(Enum.random(1..2), :node)
     }
   end
 
@@ -28,16 +29,29 @@ defmodule Eds.Factory do
     }
   end
 
+  def user_course_factory do
+    courses = Eds.Repo.all(Eds.Core.Course)
+    course = Enum.random(courses)
+    users = Eds.Repo.all(Eds.Accounts.User)
+    user = Enum.random(users)
+
+    %Eds.Accounts.UserCourse{
+      user_id: user.id,
+      course_id: course.id,
+      role: Enum.random(1..3)
+    }
+  end
+
   def chapter_factory do
     %Eds.Core.Chapter{
-      title: sequence(:title, &"Chapter #{&1}"),
+      title: Faker.Lorem.sentence(1..2),
       sections: build_list(Enum.random(3..7), :section)
     }
   end
 
   def section_factory do
     %Eds.Core.Section{
-      title: sequence(:title, &"Section #{&1}")
+      title: Faker.Lorem.sentence(1..2)
     }
   end
 
@@ -62,8 +76,16 @@ defmodule Eds.Factory do
 
   def node_factory do
     %Eds.Content.Node{
-      title: sequence(:title, &"Title #{&1}"),
+      title: Faker.Lorem.sentence(1..2),
+      text: Faker.Lorem.paragraph(1..2),
+      texts: build_list(Enum.random(1..3), :text)
+    }
+  end
 
+  def text_factory do
+    %Eds.Content.Text{
+      title: Faker.Lorem.sentence(1..2),
+      text: Faker.Lorem.paragraph(2..5),
     }
   end
 end

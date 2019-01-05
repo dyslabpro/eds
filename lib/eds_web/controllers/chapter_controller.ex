@@ -6,7 +6,15 @@ defmodule EdsWeb.ChapterController do
 
   def show(conn, %{"id" => id}) do
     chapter = Core.get_chapter!(id) |> Chapter.get_sections()
+    course = Core.get_course!(chapter.course_id)
     sections = chapter.sections
-    render(conn, "show.html", chapter: chapter, sections: sections)
+
+    render(
+      conn,
+      "show.html",
+      course: course,
+      chapter: chapter,
+      sections: sections
+    )
   end
 end

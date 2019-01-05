@@ -1,6 +1,5 @@
 defmodule EdsWeb.PageController do
   use EdsWeb, :controller
-  alias Eds.Core
   alias Eds.Core.{Category}
   alias Eds.Repo
 
