@@ -1,23 +1,52 @@
-<h2><%= @course.title %></h2>
-<h4><%= @course.subtitle %></h4>
 
-
-<ul>
-  <%= for chapter <- @chapters do %>
-    <li><%= link chapter.title, to: course_chapter_path(@conn, :show, @course.id, chapter.id) %>
-      <ul>
-        
-      </ul>
-    </li>
-  <% end %>
-</ul>
+ <h2><%= @course.title %></h2>
+    <h4><%= @course.subtitle %></h4>
 
 <ul>
   <%= for category <- @course.categories do %>
     <li><%= category.title %></li>
   <% end %>
 </ul>
+<div class="row">
+  <div class="col-md-6">
+    <ul>
+    <%= for chapter <- @chapters do %>
+      <li><%= link chapter.title, to: course_chapter_path(@conn, :show, @course.id, chapter.id) %>
+        <ul>
+          <%= for section <- chapter.sections do %>
+            <li>                
+              <%= link section.title, to: course_chapter_section_path(@conn, :show, chapter.course_id, chapter.id, section.id) %>
+            </li>
+          <% end %>
+        </ul>
+      </li>
+    <% end %>
+    </ul>
+  </div>
+  <div class="col-md-6">
+    <%= for node <- @course.nodes do %>
+    <div class="box box-widget">
+      <div class="box-header with-border">
+        <h3 class="attachment-heading"><%= node.title %></h3>        
+      </div>
+      
+      <%= for text <- node.texts do %>
+        <!-- Attachment -->
+          <div class="attachment-block clearfix">
+            <div class="attachment-pushed">
+              <h4 class="attachment-heading"><%= text.title %></h4>
 
+              <div class="attachment-text">
+                <%= text.text %>
+              </div>
+              <!-- /.attachment-text -->
+            </div>
+            <!-- /.attachment-pushed -->
+          </div>
+          <!-- /.attachment-block -->
+          <% end %>
+      </div>
+      <% end %>  
+  </div>
+</div>
 
-<span><%= link "Edit", to: course_path(@conn, :edit, @course) %></span>
-<span><%= link "Back", to: course_path(@conn, :index) %></span>

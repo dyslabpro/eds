@@ -12,7 +12,8 @@ defmodule EdsWeb.CourseController do
   def show(conn, %{"id" => id}) do
     course =
       Core.get_course!(id)
-      |> Course.preload_chapters()
+      |> Course.preload_chapters_sections()
+      |> Course.preload_nodes()
       |> Course.preload_categories()
 
     chapters = course.chapters
