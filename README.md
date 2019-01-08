@@ -1,4 +1,6 @@
 # Eds
+Development in progress, you can see the code in develop branch
+
 
 To start your EDS server:
 
@@ -9,5 +11,3 @@ To start your EDS server:
   * Start Phoenix endpoint with `mix phx.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
-
-
