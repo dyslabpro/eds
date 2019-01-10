@@ -18,34 +18,8 @@
     <!-- sidebar menu: : style can be found in sidebar.less -->
     <ul class="sidebar-menu tree" data-widget="tree">
       <li class="header">MAIN NAVIGATION</li>
-      <li class="treeview">
-        <a href="#">
-          <i class="fa fa-dashboard"></i> <span>Courses</span>
-          <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </span>
-        </a>
-        <ul class="treeview-menu" style="display: block;">
-          <%= for course <- get_user_courses(@conn) do %>
-            <li class="treeview"><%= link course.title, to: admin_course_path(@conn, :show, course) %>
-              <%= if Enum.any? course.chapters do %>
-              <ul class="treeview-menu">
-                <%= for chapter <- course.chapters do %>
-                  <li class="treeview"><%= link chapter.title, to: admin_course_chapter_path(@conn, :show, course.id, chapter.id) %>
-                    <ul class="treeview-menu">
-                      <%= for section <- chapter.sections do %>
-                        <li><%= link section.title, to: admin_course_chapter_section_path(@conn, :show, chapter.course_id, chapter.id, section.id) %></li>
-                      <% end %>
-                    </ul>
-                  </li>
-                <% end %>
-
-                </ul>
-              <% end %>
-            </li>
-          <% end %>
-        </ul>
-     </ul>
+      <li><a href="/admin/courses"><i class="fa fa-folder"></i> <span>Courses</span> </li>      
+    </ul>
   </section>
   <!-- /.sidebar -->
 </aside>

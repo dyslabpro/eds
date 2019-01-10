@@ -5,7 +5,7 @@ defmodule EdsWeb.Admin.CourseController do
   alias Eds.Core.Course
 
   def index(conn, _params) do
-    courses = Repo.all(Course) |> Repo.preload(chapters: :sections)
+    courses = Eds.Helpers.AdminHelpers.get_user_courses(conn)
     render(conn, "index.html", courses: courses)
   end
 

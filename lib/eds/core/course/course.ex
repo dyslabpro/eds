@@ -35,7 +35,7 @@ defmodule Eds.Core.Course do
 
   def preload_nodes(course) do
     course
-    |> Repo.preload(nodes: [texts: Text.by_weight])
+    |> Repo.preload(nodes: {Node.only_course, [texts: Text.by_weight]})
   end
 
   def preload_chapters_sections(courses) do

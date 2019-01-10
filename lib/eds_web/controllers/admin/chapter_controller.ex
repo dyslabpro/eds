@@ -4,11 +4,7 @@ defmodule EdsWeb.Admin.ChapterController do
   alias Eds.{Core, Repo}
   alias Eds.Core.{Chapter, Course}
 
-  def index(conn, _params) do
-    chapters = Core.list_chapters()
-    courses = Repo.all(Course) |> Repo.preload(chapters: :sections)
-    render(conn, "index.html", chapters: chapters, courses: courses)
-  end
+
 
   def new(conn, params) do
     changeset = Core.change_chapter(%Chapter{})
@@ -30,7 +26,10 @@ defmodule EdsWeb.Admin.ChapterController do
   end
 
   def show(conn, %{"id" => id}) do
-    chapter = Core.get_chapter!(id) |> Chapter.get_sections()
+    chapter =
+    Core.get_chapter!(id)
+    |> Chapter.get_sections()
+    |> Chapter.preload_nodes()
     sections = chapter.sections
     render(conn, "show.html", chapter: chapter, sections: sections)
   end

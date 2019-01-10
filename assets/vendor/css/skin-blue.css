@@ -54,7 +54,8 @@
   background-color: #3c8dbc;
 }
 .skin-blue .content-header {
-  background: transparent;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #d2d6de;
 }
 .skin-blue .wrapper,
 .skin-blue .main-sidebar,
@@ -139,4 +140,16 @@
 }
 .skin-blue.layout-top-nav .main-header > .logo:hover {
   background-color: #3b8ab8;
+}
+.pagetree{
+  background-color: #f5f5f5;
+  border-right: 1px solid #d2d6de;
+  min-height: 100%;
+
+  
+}
+.skin-blue .content{
+  padding-top: 0;
+  padding-bottom: 0;
+  
 }

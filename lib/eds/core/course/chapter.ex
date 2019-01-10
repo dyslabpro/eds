@@ -2,6 +2,7 @@ defmodule Eds.Core.Chapter do
   use Ecto.Schema
   import Ecto.Changeset
   alias Eds.Core.{Chapter, Course, Section}
+  alias Eds.Content.{Node, Text}
   alias Eds.{Repo}
 
   schema "chapters" do
@@ -11,6 +12,7 @@ defmodule Eds.Core.Chapter do
 
     belongs_to(:course, Course)
     has_many(:sections, Section, on_delete: :delete_all)
+    has_many(:nodes, Node, on_delete: :delete_all)
 
     timestamps()
   end
@@ -18,6 +20,11 @@ defmodule Eds.Core.Chapter do
   def get_sections(chapter) do
     chapter
     |> Repo.preload(:sections)
+  end
+
+  def preload_nodes(chapter) do
+    chapter
+    |> Repo.preload(nodes: {Node.only_chapter, [texts: Text.by_weight]})
   end
 
   @doc false

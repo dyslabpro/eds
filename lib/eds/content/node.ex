@@ -4,6 +4,7 @@ defmodule Eds.Content.Node do
   alias Eds.Core.{Chapter, Course, Section}
   alias Eds.Content.{Node, Text}
   alias Eds.{Repo}
+  import Ecto.Query
 
   schema "nodes" do
     field(:title, :string)
@@ -40,6 +41,9 @@ defmodule Eds.Content.Node do
     |> Node.changeset(attrs)
     |> Repo.update()
   end
+
+  def only_course(query \\ __MODULE__), do: from(q in query, where: is_nil(q.section_id) and is_nil(q.chapter_id))
+  def only_chapter(query \\ __MODULE__), do: from(q in query, where: is_nil(q.section_id))
 
   @doc false
   def changeset(%Node{} = node, attrs) do

@@ -4,11 +4,6 @@ defmodule EdsWeb.Admin.SectionController do
   alias Eds.{Core, Repo}
   alias Eds.Core.{Section, Course}
 
-  def index(conn, _params) do
-    sections = Core.list_sections()
-    render(conn, "index.html", sections: sections)
-  end
-
   def new(conn, params) do
     changeset = Core.change_section(%Section{})
 
@@ -38,7 +33,11 @@ defmodule EdsWeb.Admin.SectionController do
   end
 
   def show(conn, %{"id" => id}) do
-    section = Core.get_section!(id)
+    section =
+      Core.get_section!(id)
+      |> Section.preload_nodes()
+      |> Repo.preload(:chapter)
+
     courses = Repo.all(Course) |> Repo.preload(chapters: :sections)
     render(conn, "show.html", section: section, courses: courses)
   end

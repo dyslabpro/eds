@@ -34,13 +34,19 @@ defmodule EdsWeb.Router do
 
     get("/", PageController, :index)
 
-    resources "/courses", CourseController do
-      resources("/nodes", NodeController) do
-        resources("/texts", TextController)
-      end
+    resources("/nodes", NodeController) do
+      resources("/texts", TextController)
+    end
 
+    resources "/courses", CourseController do
+
+      resources("/nodes", NodeController)
       resources "/chapters", ChapterController do
-        resources("/sections", SectionController)
+
+        resources("/nodes", NodeController)
+        resources("/sections", SectionController) do
+          resources("/nodes", NodeController)
+        end
       end
     end
   end

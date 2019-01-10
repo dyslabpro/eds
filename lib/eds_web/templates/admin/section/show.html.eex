@@ -1,10 +1,10 @@
-<h2>Show Section</h2>
+<h2><%= @section.title %></h2>
 
-<ul>
 
-  <li>
-    <strong>Title:</strong>
-    <%= @section.title %>
-  </li>
-
-</ul>
+<div class="row">
+  <section class="col-lg-3 connectedSortable">
+  </section>
+  <section class="col-lg-9 connectedSortable">
+    <%= render("_node_block.html", assigns) %>
+  </section>
+</div>

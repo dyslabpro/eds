@@ -2,12 +2,15 @@ defmodule Eds.Core.Section do
   use Ecto.Schema
   import Ecto.Changeset
   alias Eds.Core.{Section, Chapter}
+  alias Eds.Content.{Node, Text}
+  alias Eds.{Repo}
 
   schema "sections" do
     field(:title, :string)
-    field :published, :boolean, default: false
-    field :published_at, :utc_datetime
+    field(:published, :boolean, default: false)
+    field(:published_at, :utc_datetime)
     belongs_to(:chapter, Chapter)
+    has_many(:nodes, Node, on_delete: :delete_all)
 
     timestamps()
   end
@@ -17,6 +20,11 @@ defmodule Eds.Core.Section do
     section
     |> cast(attrs, [:title, :chapter_id, :published, :published_at])
     |> validate_required([:title])
+  end
+
+  def preload_nodes(section) do
+    section
+    |> Repo.preload(nodes: [texts: Text.by_weight()])
   end
 
   def get_prev_section(section, sections) do
