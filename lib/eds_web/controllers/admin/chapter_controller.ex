@@ -4,8 +4,6 @@ defmodule EdsWeb.Admin.ChapterController do
   alias Eds.{Core, Repo}
   alias Eds.Core.{Chapter, Course}
 
-
-
   def new(conn, params) do
     changeset = Core.change_chapter(%Chapter{})
     render(conn, "new.html", changeset: changeset, course_id: params["course_id"])
@@ -27,11 +25,21 @@ defmodule EdsWeb.Admin.ChapterController do
 
   def show(conn, %{"id" => id}) do
     chapter =
-    Core.get_chapter!(id)
-    |> Chapter.get_sections()
-    |> Chapter.preload_nodes()
-    sections = chapter.sections
-    render(conn, "show.html", chapter: chapter, sections: sections)
+      Core.get_chapter!(id)
+      |> Chapter.get_sections()
+      |> Chapter.preload_nodes()
+
+    course =
+      Core.get_course!(chapter.course_id)
+      |> Course.preload_chapters_sections()
+
+    current_link = %{
+      "course" => course.id,
+      "chapter" => chapter.id,
+      "section" => nil
+    }
+
+    render(conn, "show.html", chapter: chapter, course: course, current_link: current_link)
   end
 
   def edit(conn, %{"id" => id}) do

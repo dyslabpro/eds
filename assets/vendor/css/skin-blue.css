@@ -153,3 +153,6 @@
   padding-bottom: 0;
   
 }
+.nav-tree .active{
+  font-weight: bold;
+}

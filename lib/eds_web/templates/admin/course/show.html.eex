@@ -4,27 +4,8 @@
   <div class="col-lg-3 connectedSortable pagetree">
   <h4><%= @course.title %></h4>
   <h4>Chapters:</h4>
-  <ul>
-    <%= for chapter <- @course.chapters do %>
-      <li>
-      <%= link chapter.title, to: admin_course_chapter_path(@conn, :show, @course.id, chapter.id) %>
-      <%= link to: admin_course_chapter_path(@conn, :edit, @course.id, chapter.id) do %>
-          <i class="fa fa-fw fa-edit"></i>
-      <% end %>
-        <ul>
-          <%= for section <- chapter.sections do %>
-            <li>
-              <%= link section.title, to: admin_course_chapter_section_path(@conn, :show, chapter.course_id, chapter.id, section.id) %>
-              <%= link to: admin_course_chapter_section_path(@conn, :edit, @course.id, chapter.id, section.id) do %>
-                <i class="fa fa-fw fa-edit"></i>
-              <% end %>
-            </li>
-          <% end %>
-        </ul>
-      </li>
-      <% end %>
-    <li><%= link "New chapter", to: admin_course_chapter_path(@conn, :new, @course) %></li>
-  </ul>
+  
+    <%= render("_tree_view_block.html", assigns) %>
 
   <span><%= link "Edit", to: course_path(@conn, :edit, @course) %></span>
   <span><%= link "Back", to: course_path(@conn, :index) %></span>

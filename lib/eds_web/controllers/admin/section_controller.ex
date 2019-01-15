@@ -38,8 +38,24 @@ defmodule EdsWeb.Admin.SectionController do
       |> Section.preload_nodes()
       |> Repo.preload(:chapter)
 
+    course =
+      Core.get_course!(section.chapter.course_id)
+      |> Course.preload_chapters_sections()
+
     courses = Repo.all(Course) |> Repo.preload(chapters: :sections)
-    render(conn, "show.html", section: section, courses: courses)
+
+    current_link = %{
+      "course" => course.id,
+      "chapter" => section.chapter_id,
+      "section" => section.id
+    }
+
+    render(conn, "show.html",
+      section: section,
+      courses: courses,
+      course: course,
+      current_link: current_link
+    )
   end
 
   def edit(conn, %{"id" => id}) do

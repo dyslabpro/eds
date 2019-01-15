@@ -45,13 +45,15 @@ defmodule Eds.Factory do
   def chapter_factory do
     %Eds.Core.Chapter{
       title: Faker.Lorem.sentence(1..2),
-      sections: build_list(Enum.random(3..7), :section)
+      sections: build_list(Enum.random(3..7), :section),
+      nodes: build_list(Enum.random(1..2), :node)
     }
   end
 
   def section_factory do
     %Eds.Core.Section{
-      title: Faker.Lorem.sentence(1..2)
+      title: Faker.Lorem.sentence(1..2),
+      nodes: build_list(Enum.random(1..2), :node)
     }
   end
 
