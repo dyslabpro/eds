@@ -1,0 +1,9 @@
+<ol class="breadcrumb">
+    <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active">Dashboard</li>
+    <%= for item <- get_breadcrumbs(assigns) do %>
+        <li>
+            <%= link item.title, to: item.path %>              
+        </li>
+    <% end %>
+</ol>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Admin panel</title>
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/admin.css") %>">
+  </head>
+
+  <body class="hold-transition skin-blue sidebar-mini">
+  <div class="wrapper">
+
+    <!-- Header Navbar: style can be found in header.less -->
+    <%= render("_admin_header.html", assigns) %>
+    <%= render("_admin_sidebar.html", assigns) %>
+
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>Dashboard<small> Control panel</small></h1>
+            <%= render("_admin_breadcrumb.html", assigns) %>
+        </section>
+
+        <!-- Main content -->
+    <section class="content">
+      <%= if get_flash(@conn, :info) do %>
+        <p class="alert alert-info" role="alert">
+          <%= get_flash(@conn, :info) %>
+        </p>
+      <% end %>
+      <%= if get_flash(@conn, :error) do %>
+        <p class="alert alert-danger" role="alert">
+          <%= get_flash(@conn, :error) %>            
+        </p>
+      <% end %>
+      
+      <%= render @view_module, @view_template, assigns %>
+    </section>
+
+
+    </div> <!-- /container -->
+
+
+      <footer class="main-footer">
+          <div class="pull-right hidden-xs">
+              <b>Version</b> 0.0.1
+          </div>
+          <strong>Copyright &copy; 2019 <a href="#">eds</a>.</strong> All rights reserved.
+      </footer>
+  </div>
+  <!-- ./wrapper -->
+
+
+    <script src="<%= static_path(@conn, "/js/admin.js") %>"></script>
+  </body>
+</html>

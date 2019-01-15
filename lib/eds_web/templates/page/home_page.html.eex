@@ -1,0 +1,6 @@
+<div class="jumbotron">
+  <h2><%= gettext "Welcome to %{name}!", name: "Eds" %></h2>
+  <p class="lead">Online Education System</p>
+</div>
+
+

@@ -1,0 +1,21 @@
+
+
+<div class="row">
+  <div class="col-lg-3 connectedSortable pagetree">
+  <h4><%= @course.title %></h4>
+  <h4>Chapters:</h4>
+  
+    <%= render("_tree_view_block.html", assigns) %>
+
+  <span><%= link "Edit", to: course_path(@conn, :edit, @course) %></span>
+  <span><%= link "Back", to: course_path(@conn, :index) %></span>
+</div>
+<div class="col-lg-9 connectedSortable">
+  <ul>
+    <li><strong>Title: </strong><%= @course.title %></li>
+    <li><strong>Subtitle: </strong><%= @course.subtitle %></li>
+  </ul>
+
+  <%= render("_node_block.html", assigns) %>
+</div>
+</div>

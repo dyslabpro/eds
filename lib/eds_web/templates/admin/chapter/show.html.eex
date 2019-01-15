@@ -1,0 +1,13 @@
+<h2>Show Chapter</h2>
+
+<div class="row">
+  <section class="col-lg-3 connectedSortable">
+ <%= render(EdsWeb.Admin.CourseView, "_tree_view_block.html", assigns) %>
+  </section>
+  <section class="col-lg-9 connectedSortable">
+    <ul>
+      <li><strong>Title: </strong><%= @chapter.title %></li>
+    </ul>
+    <%= render("_node_block.html", assigns) %>
+  </section>
+</div>

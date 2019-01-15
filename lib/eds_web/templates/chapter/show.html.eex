@@ -1,0 +1,20 @@
+<nav aria-label="breadcrumb" role="navigation">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><%= link @course.title, to: course_path(@conn, :show, @course) %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= @chapter.title %></li>
+  </ol>
+</nav>
+<h2>Show Chapter</h2>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @chapter.title %>
+  </li>
+  <%= for section <- @sections do %>
+    <li><%= link section.title, to: course_chapter_section_path(@conn, :show, @chapter.course_id, @chapter.id, section.id) %></li>
+  <% end %>
+
+</ul>

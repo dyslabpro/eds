@@ -1,0 +1,23 @@
+<h2>Listing Sections</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for section <- @sections do %>
+    <tr>
+      <td><%= section.title %></td>
+
+      <td class="text-right">
+
+
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

@@ -1,0 +1,4 @@
+<h2>New Section</h2>
+
+
+<%= render "form.html", Map.put(assigns, :action, admin_course_chapter_section_path(@conn, :create, @course_id, @chapter_id)) %>

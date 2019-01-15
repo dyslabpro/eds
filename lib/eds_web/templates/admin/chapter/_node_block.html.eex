@@ -1,0 +1,35 @@
+<h4>Nodes:</h4>
+
+    <%= for node <- @chapter.nodes do %>
+    <div class="box box-widget">
+      <div class="box-header with-border">
+        <h3 class="attachment-heading"><%= node.title %></h3>
+        <div class="box-tools">
+          <%= link to: admin_course_chapter_node_path(@conn, :edit, @chapter.course_id, @chapter.id, node.id) do %>
+              <i class="fa fa-fw fa-edit"></i>
+          <% end %>
+          <%= link to: admin_node_text_path(@conn, :new, node) do %>
+              <i class="fa fa-file-text-o"></i>
+          <% end %>
+        </div>
+      </div>
+      
+      <%= for text <- node.texts do %>
+        <!-- Attachment -->
+          <div class="attachment-block clearfix">
+            <div class="attachment-pushed">
+              <h4 class="attachment-heading"><%= text.title %></h4>
+
+              <div class="attachment-text">
+                <%= text.text %>
+              </div>
+              <!-- /.attachment-text -->
+            </div>
+            <!-- /.attachment-pushed -->
+          </div>
+          <!-- /.attachment-block -->
+          <% end %>
+
+      </div>
+      <% end %>
+      <%= link "New node", to: admin_course_chapter_node_path(@conn, :new, @chapter.course_id, @chapter) %>

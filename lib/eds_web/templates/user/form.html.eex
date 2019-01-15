@@ -1,0 +1,101 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= label f, :name, class: "control-label" %>
+    <%= text_input f, :name, class: "form-control" %>
+    <%= error_tag f, :name %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :email, class: "control-label" %>
+    <%= text_input f, :email, class: "form-control" %>
+    <%= error_tag f, :email %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :handle, class: "control-label" %>
+    <%= text_input f, :handle, class: "form-control" %>
+    <%= error_tag f, :handle %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :facebook_handle, class: "control-label" %>
+    <%= text_input f, :facebook_handle, class: "form-control" %>
+    <%= error_tag f, :facebook_handle %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :google_handle, class: "control-label" %>
+    <%= text_input f, :google_handle, class: "form-control" %>
+    <%= error_tag f, :google_handle %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :twitter_handle, class: "control-label" %>
+    <%= text_input f, :twitter_handle, class: "form-control" %>
+    <%= error_tag f, :twitter_handle %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :website, class: "control-label" %>
+    <%= text_input f, :website, class: "form-control" %>
+    <%= error_tag f, :website %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :auth_token, class: "control-label" %>
+    <%= text_input f, :auth_token, class: "form-control" %>
+    <%= error_tag f, :auth_token %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :auth_token_expires_at, class: "control-label" %>
+    <%= datetime_select f, :auth_token_expires_at, class: "form-control" %>
+    <%= error_tag f, :auth_token_expires_at %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :joined_at, class: "control-label" %>
+    <%= datetime_select f, :joined_at, class: "form-control" %>
+    <%= error_tag f, :joined_at %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :signed_in_at, class: "control-label" %>
+    <%= datetime_select f, :signed_in_at, class: "form-control" %>
+    <%= error_tag f, :signed_in_at %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :admin, class: "control-label" %>
+    <%= checkbox f, :admin, class: "checkbox" %>
+    <%= error_tag f, :admin %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :teacher, class: "control-label" %>
+    <%= checkbox f, :teacher, class: "checkbox" %>
+    <%= error_tag f, :teacher %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :student, class: "control-label" %>
+    <%= checkbox f, :student, class: "checkbox" %>
+    <%= error_tag f, :student %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :avatar, class: "control-label" %>
+    <%= text_input f, :avatar, class: "form-control" %>
+    <%= error_tag f, :avatar %>
+  </div>
+
+  <div class="form-group">
+    <%= submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>

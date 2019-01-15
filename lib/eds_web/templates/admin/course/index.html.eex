@@ -1,0 +1,54 @@
+
+<div class="row">
+  <div class="col-md-8">
+        <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Courses</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="table-responsive">
+                <table class="table no-margin">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Title</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <%= for course <- @courses do %>
+                    <tr>
+                      <td><%= link course.id, to: admin_course_path(@conn, :show, course) %></td>
+                      <td><%= link course.title, to: admin_course_path(@conn, :show, course) %></td>
+                      <td><span class="label label-success">Published</span></td>
+                      <td>
+                        <%= link to: admin_course_path(@conn, :edit, course) do %>
+                          <i class="fa fa-fw fa-edit"></i>
+                        <% end %>
+                      </td>
+                    </tr>                 
+                  <% end %>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.table-responsive -->
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+              <%= link "Create new course", to: admin_course_path(@conn, :new), class: "btn btn-sm btn-info btn-flat pull-left" %>
+            </div>
+            <!-- /.box-footer -->
+          </div>
+        </div>
+      </div>
+    </div>
+	</div>
+
+

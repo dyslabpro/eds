@@ -1,0 +1,83 @@
+<h2>Show User</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @user.name %>
+  </li>
+
+  <li>
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </li>
+
+  <li>
+    <strong>Handle:</strong>
+    <%= @user.handle %>
+  </li>
+
+  <li>
+    <strong>Facebook handle:</strong>
+    <%= @user.facebook_handle %>
+  </li>
+
+  <li>
+    <strong>Google handle:</strong>
+    <%= @user.google_handle %>
+  </li>
+
+  <li>
+    <strong>Twitter handle:</strong>
+    <%= @user.twitter_handle %>
+  </li>
+
+  <li>
+    <strong>Website:</strong>
+    <%= @user.website %>
+  </li>
+
+  <li>
+    <strong>Auth token:</strong>
+    <%= @user.auth_token %>
+  </li>
+
+  <li>
+    <strong>Auth token expires at:</strong>
+    <%= @user.auth_token_expires_at %>
+  </li>
+
+  <li>
+    <strong>Joined at:</strong>
+    <%= @user.joined_at %>
+  </li>
+
+  <li>
+    <strong>Signed in at:</strong>
+    <%= @user.signed_in_at %>
+  </li>
+
+  <li>
+    <strong>Admin:</strong>
+    <%= @user.admin %>
+  </li>
+
+  <li>
+    <strong>Teacher:</strong>
+    <%= @user.teacher %>
+  </li>
+
+  <li>
+    <strong>Student:</strong>
+    <%= @user.student %>
+  </li>
+
+  <li>
+    <strong>Avatar:</strong>
+    <%= @user.avatar %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: user_path(@conn, :edit, @user) %></span>
+<span><%= link "Back", to: user_path(@conn, :index) %></span>
