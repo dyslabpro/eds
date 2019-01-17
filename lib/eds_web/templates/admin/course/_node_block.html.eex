@@ -5,10 +5,10 @@
       <div class="box-header with-border">
         <h3 class="attachment-heading"><%= node.title %></h3>
         <div class="box-tools">
-          <%= link to: admin_course_node_path(@conn, :edit, @course.id, node.id) do %>
+          <%= link to: Routes.admin_course_node_path(@conn, :edit, @course.id, node.id) do %>
               <i class="fa fa-fw fa-edit"></i>
           <% end %>
-          <%= link to: admin_node_text_path(@conn, :new, node) do %>
+          <%= link to: Routes.admin_node_text_path(@conn, :new, node) do %>
               <i class="fa fa-file-text-o"></i>
           <% end %>
         </div>
@@ -32,4 +32,4 @@
 
       </div>
       <% end %>
-      <%= link "New node", to: admin_course_node_path(@conn, :new, @course) %>
+      <%= link "New node", to: Routes.admin_course_node_path(@conn, :new, @course) %>

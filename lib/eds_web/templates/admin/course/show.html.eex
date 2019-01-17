@@ -7,8 +7,8 @@
   
     <%= render("_tree_view_block.html", assigns) %>
 
-  <span><%= link "Edit", to: course_path(@conn, :edit, @course) %></span>
-  <span><%= link "Back", to: course_path(@conn, :index) %></span>
+  <span><%= link "Edit", to: Routes.course_path(@conn, :edit, @course) %></span>
+  <span><%= link "Back", to: Routes.course_path(@conn, :index) %></span>
 </div>
 <div class="col-lg-9 connectedSortable">
   <ul>

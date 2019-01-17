@@ -84,8 +84,8 @@ defmodule Eds.Accounts.User do
     change(user, %{
       auth_token: nil,
       auth_token_expires_at: nil,
-      signed_in_at: Timex.now(),
-      joined_at: user.joined_at || Timex.now()
+      signed_in_at: NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second),
+      joined_at: user.joined_at || NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second)
     })
   end
 

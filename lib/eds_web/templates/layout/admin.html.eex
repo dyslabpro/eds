@@ -8,7 +8,7 @@
     <meta name="author" content="">
 
     <title>Admin panel</title>
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/admin.css") %>">
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/admin.css") %>">
   </head>
 
   <body class="hold-transition skin-blue sidebar-mini">
@@ -54,6 +54,6 @@
   <!-- ./wrapper -->
 
 
-    <script src="<%= static_path(@conn, "/js/admin.js") %>"></script>
+    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

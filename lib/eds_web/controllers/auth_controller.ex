@@ -13,7 +13,7 @@ defmodule EdsWeb.AuthController do
     else
       conn
       |> put_flash(:success, "You aren't in our system! No worries, it's free to join. 💚")
-      |> redirect(to: user_path(conn, :new, %{email: email}))
+      |> redirect(to: Routes.user_path(conn, :new, %{email: email}))
     end
   end
 
@@ -26,7 +26,7 @@ defmodule EdsWeb.AuthController do
     user = Repo.get_by(User, email: email, auth_token: auth_token)
 
     if user && Timex.before?(Timex.now(), user.auth_token_expires_at) do
-      sign_in_and_redirect(conn, user, page_path(conn, :home))
+      sign_in_and_redirect(conn, user, Routes.page_path(conn, :home))
     else
       conn
       |> put_flash(:error, "Whoops!")
@@ -49,6 +49,6 @@ defmodule EdsWeb.AuthController do
     conn
     |> configure_session(drop: true)
     |> delete_resp_cookie("_eds_user")
-    |> redirect(to: page_path(conn, :home))
+    |> redirect(to: Routes.page_path(conn, :home))
   end
 end

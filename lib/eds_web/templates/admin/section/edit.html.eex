@@ -1,4 +1,4 @@
 <h2>Edit Section</h2>
 
-<%= render "form.html", Map.put(assigns, :action, admin_course_chapter_section_path(@conn, :update, @course_id, @chapter_id, @section)) %>
+<%= render "form.html", Map.put(assigns, :action, Routes.admin_course_chapter_section_path(@conn, :update, @course_id, @chapter_id, @section)) %>
 

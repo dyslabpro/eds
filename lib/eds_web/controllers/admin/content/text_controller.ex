@@ -23,7 +23,7 @@ defmodule EdsWeb.Admin.TextController do
       {:ok, text} ->
         conn
         |> put_flash(:info, "Text created successfully.")
-        |> redirect(to: admin_course_path(conn, :show, conn.params["course_id"]))
+        |> redirect(to: Routes.admin_course_path(conn, :show, conn.params["course_id"]))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)

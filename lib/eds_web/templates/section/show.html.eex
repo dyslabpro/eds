@@ -1,8 +1,8 @@
 <nav aria-label="breadcrumb" role="navigation">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Home</a></li>
-    <li class="breadcrumb-item"><%= link @course.title, to: course_path(@conn, :show, @course) %></li>
-    <li class="breadcrumb-item"><%= link @chapter.title, to: course_chapter_path(@conn, :show, @course.id, @chapter.id) %></li>
+    <li class="breadcrumb-item"><%= link @course.title, to: Routes.course_path(@conn, :show, @course) %></li>
+    <li class="breadcrumb-item"><%= link @chapter.title, to: Routes.course_chapter_path(@conn, :show, @course.id, @chapter.id) %></li>
     <li class="breadcrumb-item active" aria-current="page"><%= @section.title %></li>
   </ol>
 </nav>
@@ -23,7 +23,7 @@
         <% else %>
           <li>
         <% end %>
-          <%= link section.title, to: course_chapter_section_path(@conn, :show, @course.id, @chapter.id, section.id) %>
+          <%= link section.title, to: Routes.course_chapter_section_path(@conn, :show, @course.id, @chapter.id, section.id) %>
         </li>
         <% end %>
       </ul>
@@ -49,10 +49,10 @@
 <nav aria-label="...">
   <ul class="pager">
     <%= if @prev do %>
-      <li class="previous"><%= link "Older", to: course_chapter_section_path(@conn, :show, @course.id, @chapter.id, @prev.id) %></li>
+      <li class="previous"><%= link "Older", to: Routes.course_chapter_section_path(@conn, :show, @course.id, @chapter.id, @prev.id) %></li>
     <% end %>
     <%= if @next do %>
-      <li class="next"><%= link "Newer", to: course_chapter_section_path(@conn, :show, @course.id, @chapter.id, @next.id) %></li>
+      <li class="next"><%= link "Newer", to: Routes.course_chapter_section_path(@conn, :show, @course.id, @chapter.id, @next.id) %></li>
     <% end %>
   </ul>
 </nav>
