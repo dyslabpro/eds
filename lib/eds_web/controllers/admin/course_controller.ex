@@ -31,7 +31,7 @@ defmodule EdsWeb.Admin.CourseController do
       {:ok, course} ->
         conn
         |> put_flash(:info, "Course created successfully.")
-        |> redirect(to: admin_course_path(conn, :show, course))
+        |> redirect(to: Routes.admin_course_path(conn, :show, course))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -66,7 +66,7 @@ defmodule EdsWeb.Admin.CourseController do
       {:ok, course} ->
         conn
         |> put_flash(:info, "Course updated successfully.")
-        |> redirect(to: admin_course_path(conn, :show, course))
+        |> redirect(to: Routes.admin_course_path(conn, :show, course))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", course: course, changeset: changeset)
@@ -79,6 +79,6 @@ defmodule EdsWeb.Admin.CourseController do
 
     conn
     |> put_flash(:info, "Course deleted successfully.")
-    |> redirect(to: course_path(conn, :index))
+    |> redirect(to: Routes.course_path(conn, :index))
   end
 end

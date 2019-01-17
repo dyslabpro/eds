@@ -1,5 +1,5 @@
 <h2>New Chapter</h2>
 
-<%= render "form.html", Map.put(assigns, :action, admin_course_chapter_path(@conn, :create, @course_id)) %>
+<%= render "form.html", Map.put(assigns, :action, Routes.admin_course_chapter_path(@conn, :create, @course_id)) %>
 
 

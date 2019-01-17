@@ -27,6 +27,10 @@ defmodule Eds.Core.Section do
     |> Repo.preload(nodes: [texts: Text.by_weight()])
   end
 
+  def get_section_with_parent(id) do
+    Repo.get!(Section, id) |> Repo.preload(chapter: :course)
+  end
+
   def get_prev_section(section, sections) do
     index =
       sections

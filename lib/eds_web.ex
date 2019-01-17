@@ -21,7 +21,7 @@ defmodule EdsWeb do
     quote do
       use Phoenix.Controller, namespace: EdsWeb
       import Plug.Conn
-      import EdsWeb.Router.Helpers
+      alias EdsWeb.Router.Helpers, as: Routes
       import EdsWeb.Gettext
       alias Eds.Repo
       import Ecto
@@ -42,7 +42,7 @@ defmodule EdsWeb do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import EdsWeb.Router.Helpers
+      alias EdsWeb.Router.Helpers, as: Routes
       import EdsWeb.ErrorHelpers
       import EdsWeb.Gettext
       import Eds.Helpers.AdminHelpers
@@ -61,7 +61,7 @@ defmodule EdsWeb do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import EdsWeb.Router.Helpers
+      alias EdsWeb.Router.Helpers, as: Routes
       import EdsWeb.ErrorHelpers
       import EdsWeb.Gettext
       import Eds.Helpers.AdminHelpers

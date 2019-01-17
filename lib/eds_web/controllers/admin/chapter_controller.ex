@@ -16,7 +16,7 @@ defmodule EdsWeb.Admin.ChapterController do
       {:ok, chapter} ->
         conn
         |> put_flash(:info, "Chapter created successfully.")
-        |> redirect(to: admin_course_path(conn, :show, chapter.course_id))
+        |> redirect(to: Routes.admin_course_path(conn, :show, chapter.course_id))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -62,7 +62,7 @@ defmodule EdsWeb.Admin.ChapterController do
       {:ok, chapter} ->
         conn
         |> put_flash(:info, "Chapter updated successfully.")
-        |> redirect(to: admin_course_path(conn, :show, chapter.course_id))
+        |> redirect(to: Routes.admin_course_path(conn, :show, chapter.course_id))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", chapter: chapter, changeset: changeset)
@@ -75,6 +75,6 @@ defmodule EdsWeb.Admin.ChapterController do
 
     conn
     |> put_flash(:info, "Chapter deleted successfully.")
-    |> redirect(to: admin_course_path(conn, chapter.course_id(:show)))
+    |> redirect(to: Routes.admin_course_path(conn, chapter.course_id(:show)))
   end
 end

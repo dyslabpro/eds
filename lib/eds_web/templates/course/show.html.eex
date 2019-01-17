@@ -11,11 +11,11 @@
   <div class="col-md-6">
     <ul>
     <%= for chapter <- @chapters do %>
-      <li><%= link chapter.title, to: course_chapter_path(@conn, :show, @course.id, chapter.id) %>
+      <li><%= link chapter.title, to: Routes.course_chapter_path(@conn, :show, @course.id, chapter.id) %>
         <ul>
           <%= for section <- chapter.sections do %>
             <li>                
-              <%= link section.title, to: course_chapter_section_path(@conn, :show, chapter.course_id, chapter.id, section.id) %>
+              <%= link section.title, to: Routes.course_chapter_section_path(@conn, :show, chapter.course_id, chapter.id, section.id) %>
             </li>
           <% end %>
         </ul>

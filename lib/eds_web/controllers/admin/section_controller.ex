@@ -2,7 +2,7 @@ defmodule EdsWeb.Admin.SectionController do
   use EdsWeb, :controller
 
   alias Eds.{Core, Repo}
-  alias Eds.Core.{Section, Course}
+  alias Eds.Core.{Section, Course, Chapter}
 
   def new(conn, params) do
     changeset = Core.change_section(%Section{})
@@ -24,7 +24,7 @@ defmodule EdsWeb.Admin.SectionController do
         conn
         |> put_flash(:info, "Section created successfully.")
         |> redirect(
-          to: admin_course_chapter_path(conn, :show, conn.params["course_id"], section.chapter_id)
+          to: Routes.admin_course_chapter_path(conn, :show, conn.params["course_id"], section.chapter_id)
         )
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -80,7 +80,7 @@ defmodule EdsWeb.Admin.SectionController do
       {:ok, _section} ->
         conn
         |> put_flash(:info, "Section updated successfully.")
-        |> redirect(to: admin_course_path(conn, :show, conn.params["course_id"]))
+        |> redirect(to: Routes.admin_course_path(conn, :show, conn.params["course_id"]))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", section: section, changeset: changeset)

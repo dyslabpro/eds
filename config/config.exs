@@ -14,20 +14,21 @@ config :eds, EdsWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "c5ARI9y/VG1nA1wVYTPQYVLbGwXGCXLiRKmjMK4Pn1J7Kr74sXf/zxK0FEHJfnFU",
   render_errors: [view: EdsWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Eds.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: Eds.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-  config :ueberauth, Ueberauth,
-    providers: [
-      facebook: { Ueberauth.Strategy.Facebook, [] }
+config :ueberauth, Ueberauth,
+  providers: [
+    facebook: {Ueberauth.Strategy.Facebook, []}
+  ]
 
-    ]
+# Use Jason for JSON parsing in Phoenix
+config :phoenix, :json_library, Jason
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
+import_config "#{Mix.env()}.exs"

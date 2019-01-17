@@ -1,5 +1,5 @@
 <h2>New Text</h2>
 
-<%= render "form.html", Map.put(assigns, :action, admin_node_text_path(@conn, :create, @node_id)) %>
+<%= render "form.html", Map.put(assigns, :action, Routes.admin_node_text_path(@conn, :create, @node_id)) %>
 
 

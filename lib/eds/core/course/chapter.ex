@@ -27,6 +27,10 @@ defmodule Eds.Core.Chapter do
     |> Repo.preload(nodes: {Node.only_chapter, [texts: Text.by_weight]})
   end
 
+  def get_chapter_with_parent(id) do
+    Repo.get!(Chapter, id) |> Repo.preload(:course)
+  end
+
   @doc false
   def changeset(%Chapter{} = chapter, attrs) do
     chapter

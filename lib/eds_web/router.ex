@@ -6,6 +6,7 @@ defmodule EdsWeb.Router do
   pipeline :browser do
     plug(:accepts, ["html"])
     plug(:fetch_session)
+    plug(Plug.Turbolinks)
     plug(:fetch_flash)
     plug(:protect_from_forgery)
     plug(:put_secure_browser_headers)
@@ -24,9 +25,14 @@ defmodule EdsWeb.Router do
   scope "/auth", EdsWeb do
     pipe_through([:browser])
 
-    get("/:provider", AuthController, :request)
-    get("/:provider/callback", AuthController, :callback)
-    post("/:provider/callback", AuthController, :callback)
+    # get("/:provider", AuthController, :request)
+    # get("/:provider/callback", AuthController, :callback)
+    # post("/:provider/callback", AuthController, :callback)
+    for provider <- ~w(facebook) do
+      get("/#{provider}", AuthController, :request, as: "#{provider}_auth")
+      get("/#{provider}/callback", AuthController, :callback, as: "#{provider}_auth")
+      post("/#{provider}/callback", AuthController, :callback, as: "#{provider}_auth")
+    end
   end
 
   scope "/admin", EdsWeb.Admin, as: :admin do
@@ -38,15 +44,19 @@ defmodule EdsWeb.Router do
       resources("/texts", TextController)
     end
 
-    resources "/courses", CourseController do
-
+    resources "/chapters", ChapterController, only: [] do
       resources("/nodes", NodeController)
-      resources "/chapters", ChapterController do
+    end
 
-        resources("/nodes", NodeController)
-        resources("/sections", SectionController) do
-          resources("/nodes", NodeController)
-        end
+    resources "/sections", SectionController, only: [] do
+      resources("/nodes", NodeController)
+    end
+
+    resources "/courses", CourseController do
+      resources("/nodes", NodeController)
+
+      resources "/chapters", ChapterController do
+        resources("/sections", SectionController)
       end
     end
   end

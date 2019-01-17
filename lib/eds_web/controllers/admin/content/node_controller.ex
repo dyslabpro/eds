@@ -2,22 +2,21 @@ defmodule EdsWeb.Admin.NodeController do
   use EdsWeb, :controller
 
   alias Eds.Content.{Node}
+  alias Eds.Core.{Section, Course, Chapter}
 
   def new(conn, params) do
     changeset = Node.changeset(%Node{}, %{})
 
     {node_params, path} =
       case params do
-        %{"course_id" => c, "chapter_id" => ch, "section_id" => s} ->
-          {%{"course_id" => c, "chapter_id" => ch, "section_id" => s},
-           admin_course_chapter_section_node_path(conn, :create, c, ch, s)}
+        %{"section_id" => s} ->
+          {%{"section_id" => s}, Routes.admin_section_node_path(conn, :create, s)}
 
-        %{"chapter_id" => ch, "course_id" => c} ->
-          {%{"course_id" => c, "chapter_id" => ch},
-           admin_course_chapter_node_path(conn, :create, c, ch)}
+        %{"chapter_id" => ch} ->
+          {%{"chapter_id" => ch}, Routes.admin_chapter_node_path(conn, :create, ch)}
 
         %{"course_id" => c} ->
-          {%{"course_id" => c}, admin_course_node_path(conn, :create, c)}
+          {%{"course_id" => c}, Routes.admin_course_node_path(conn, :create, c)}
 
         _ ->
           {%{}, nil}
@@ -47,22 +46,29 @@ defmodule EdsWeb.Admin.NodeController do
 
     case Node.create(node_params) do
       {:ok, node} ->
-        path = admin_course_path(conn, :show, node.course_id)
+        path =
+          cond do
+            Map.has_key?(conn.params, "section_id") ->
+              section = Section.get_section_with_parent(conn.params["section_id"])
 
-        if conn.params["section_id"] do
-          path =
-            admin_course_chapter_section_path(
-              conn,
-              :show,
-              node.course_id,
-              node.chapter_id,
-              node.section_id
-            )
-        end
+              Routes.admin_course_chapter_section_path(
+                conn,
+                :show,
+                section.chapter.course_id,
+                section.chapter.id,
+                section.id
+              )
 
-        if conn.params["chapter_id"] do
-          path = admin_course_chapter_path(conn, :show, node.course_id, node.chapter_id)
-        end
+            Map.has_key?(conn.params, "chapter_id") ->
+              chapter = Chapter.get_chapter_with_parent(conn.params["chapter_id"])
+              Routes.admin_course_chapter_path(conn, :show, chapter.course_id, chapter.id)
+
+            Map.has_key?(conn.params, "course_id") ->
+              Routes.admin_course_path(conn, :show, conn.params["course_id"])
+
+            true ->
+              "/admin"
+          end
 
         conn
         |> put_flash(:info, "Node created successfully.")
@@ -93,7 +99,7 @@ defmodule EdsWeb.Admin.NodeController do
       {:ok, node} ->
         conn
         |> put_flash(:info, "Node updated successfully.")
-        |> redirect(to: admin_course_path(conn, :show, node.course_id))
+        |> redirect(to: Routes.admin_course_path(conn, :show, node.course_id))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", node: node, changeset: changeset)

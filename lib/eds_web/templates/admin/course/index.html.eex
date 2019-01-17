@@ -25,11 +25,11 @@
                   <tbody>
                   <%= for course <- @courses do %>
                     <tr>
-                      <td><%= link course.id, to: admin_course_path(@conn, :show, course) %></td>
-                      <td><%= link course.title, to: admin_course_path(@conn, :show, course) %></td>
+                      <td><%= link course.id, to: Routes.admin_course_path(@conn, :show, course) %></td>
+                      <td><%= link course.title, to: Routes.admin_course_path(@conn, :show, course) %></td>
                       <td><span class="label label-success">Published</span></td>
                       <td>
-                        <%= link to: admin_course_path(@conn, :edit, course) do %>
+                        <%= link to: Routes.admin_course_path(@conn, :edit, course) do %>
                           <i class="fa fa-fw fa-edit"></i>
                         <% end %>
                       </td>
@@ -42,7 +42,7 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix">
-              <%= link "Create new course", to: admin_course_path(@conn, :new), class: "btn btn-sm btn-info btn-flat pull-left" %>
+              <%= link "Create new course", to: Routes.admin_course_path(@conn, :new), class: "btn btn-sm btn-info btn-flat pull-left" %>
             </div>
             <!-- /.box-footer -->
           </div>

@@ -1,7 +1,10 @@
 defmodule EdsWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :eds
 
-  socket("/socket", EdsWeb.UserSocket)
+  socket("/socket", EdsWeb.UserSocket,
+    # or list of options
+    websocket: true
+  )
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -30,7 +33,7 @@ defmodule EdsWeb.Endpoint do
     Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json],
     pass: ["*/*"],
-    json_decoder: Poison
+    json_decoder: Jason
   )
 
   plug(Plug.MethodOverride)
