@@ -19,9 +19,8 @@ defmodule Eds.Helpers.AdminHelpers do
     end
   end
 
-  @spec get_breadcrumbs(any()) :: [%{path: <<_::48>>, title: <<_::32>>}, ...]
-  def get_breadcrumbs(conn) do
-    b = "conn.assigns[:breadcrumb]"
+
+  def get_breadcrumbs(_conn) do
     breadcrumbs = [
       %{title: "Home", path: "/admin"}
     ]

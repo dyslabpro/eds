@@ -4,6 +4,7 @@ defmodule Eds.Repo.Migrations.CreateSections do
   def change do
     create table(:sections) do
       add :title, :string
+      add :weight, :integer
       add :chapter_id, references(:chapters)
 
       add :published, :boolean, default: false

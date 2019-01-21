@@ -4,6 +4,7 @@ defmodule Eds.Content.Text do
   alias Eds.Content.{Node, Text}
   alias Eds.{Repo}
   import Ecto.Query
+  use Eds.Core
 
   schema "texts" do
     field(:title, :string)
@@ -13,8 +14,6 @@ defmodule Eds.Content.Text do
 
     timestamps()
   end
-
-  def by_weight(query \\ __MODULE__), do: from(q in query, order_by: q.weight)
 
   def create(attrs \\ %{}) do
     %Text{}

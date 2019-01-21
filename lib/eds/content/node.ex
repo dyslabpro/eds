@@ -9,8 +9,9 @@ defmodule Eds.Content.Node do
   schema "nodes" do
     field(:title, :string)
     field(:text, :string)
-    field :published, :boolean, default: false
-    field :published_at, :utc_datetime
+    field(:weight, :integer)
+    field(:published, :boolean, default: false)
+    field(:published_at, :utc_datetime)
     belongs_to(:course, Course)
     belongs_to(:section, Section)
     belongs_to(:chapter, Chapter)
@@ -42,13 +43,24 @@ defmodule Eds.Content.Node do
     |> Repo.update()
   end
 
-  def only_course(query \\ __MODULE__), do: from(q in query, where: is_nil(q.section_id) and is_nil(q.chapter_id))
+  def only_course(query \\ __MODULE__),
+    do: from(q in query, where: is_nil(q.section_id) and is_nil(q.chapter_id))
+
   def only_chapter(query \\ __MODULE__), do: from(q in query, where: is_nil(q.section_id))
 
   @doc false
   def changeset(%Node{} = node, attrs) do
     node
-    |> cast(attrs, [:title, :course_id, :section_id, :chapter_id, :text, :published, :published_at])
+    |> cast(attrs, [
+      :title,
+      :course_id,
+      :section_id,
+      :chapter_id,
+      :text,
+      :published,
+      :published_at,
+      :weight
+    ])
     |> validate_required([:title])
   end
 end

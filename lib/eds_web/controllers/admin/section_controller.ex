@@ -5,7 +5,7 @@ defmodule EdsWeb.Admin.SectionController do
   alias Eds.Core.{Section, Course, Chapter}
 
   def new(conn, params) do
-    changeset = Core.change_section(%Section{})
+    changeset = Section.change_section(%Section{})
 
     render(
       conn,
@@ -19,7 +19,7 @@ defmodule EdsWeb.Admin.SectionController do
   def create(conn, %{"section" => section_params}) do
     section_params = Map.put_new(section_params, "chapter_id", conn.params["chapter_id"])
 
-    case Core.create_section(section_params) do
+    case Section.create_section(section_params) do
       {:ok, section} ->
         conn
         |> put_flash(:info, "Section created successfully.")
@@ -34,12 +34,12 @@ defmodule EdsWeb.Admin.SectionController do
 
   def show(conn, %{"id" => id}) do
     section =
-      Core.get_section!(id)
+    Section.get_section!(id)
       |> Section.preload_nodes()
       |> Repo.preload(:chapter)
 
     course =
-      Core.get_course!(section.chapter.course_id)
+    Course.get_course!(section.chapter.course_id)
       |> Course.preload_chapters_sections()
 
     courses = Repo.all(Course) |> Repo.preload(chapters: :sections)
@@ -59,9 +59,9 @@ defmodule EdsWeb.Admin.SectionController do
   end
 
   def edit(conn, %{"id" => id}) do
-    section = Core.get_section!(id)
-    chapter = Core.get_chapter!(section.chapter_id)
-    changeset = Core.change_section(section)
+    section = Section.get_section!(id)
+    chapter = Chapter.get_chapter!(section.chapter_id)
+    changeset = Section.change_section(section)
 
     render(
       conn,
@@ -74,9 +74,9 @@ defmodule EdsWeb.Admin.SectionController do
   end
 
   def update(conn, %{"id" => id, "section" => section_params}) do
-    section = Core.get_section!(id)
+    section = Section.get_section!(id)
 
-    case Core.update_section(section, section_params) do
+    case Section.update_section(section, section_params) do
       {:ok, _section} ->
         conn
         |> put_flash(:info, "Section updated successfully.")
@@ -88,8 +88,8 @@ defmodule EdsWeb.Admin.SectionController do
   end
 
   def delete(conn, %{"id" => id}) do
-    section = Core.get_section!(id)
-    {:ok, _section} = Core.delete_section(section)
+    section = Section.get_section!(id)
+    {:ok, _section} = Section.delete_section(section)
 
     conn
     |> put_flash(:info, "Section deleted successfully.")

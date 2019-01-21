@@ -45,6 +45,7 @@ defmodule Eds.Factory do
   def chapter_factory do
     %Eds.Core.Chapter{
       title: Faker.Lorem.sentence(1..2),
+      weight: Enum.random(0..11),
       sections: build_list(Enum.random(3..7), :section),
       nodes: build_list(Enum.random(1..2), :node)
     }
@@ -53,6 +54,7 @@ defmodule Eds.Factory do
   def section_factory do
     %Eds.Core.Section{
       title: Faker.Lorem.sentence(1..2),
+      weight: Enum.random(0..11),
       nodes: build_list(Enum.random(1..2), :node)
     }
   end
@@ -80,6 +82,7 @@ defmodule Eds.Factory do
     %Eds.Content.Node{
       title: Faker.Lorem.sentence(1..2),
       text: Faker.Lorem.paragraph(1..2),
+      weight: Enum.random(0..11),
       texts: build_list(Enum.random(1..3), :text)
     }
   end
@@ -88,6 +91,7 @@ defmodule Eds.Factory do
     %Eds.Content.Text{
       title: Faker.Lorem.sentence(1..2),
       text: Faker.Lorem.paragraph(2..5),
+      weight: Enum.random(0..11),
     }
   end
 end
