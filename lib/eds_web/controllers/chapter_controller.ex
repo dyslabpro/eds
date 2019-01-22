@@ -5,7 +5,11 @@ defmodule EdsWeb.ChapterController do
   alias Eds.Core.{Course, Chapter}
 
   def show(conn, %{"id" => id}) do
-    chapter = Chapter.get_chapter!(id) |> Chapter.get_sections()
+    chapter =
+      Chapter.get_chapter!(id)
+      |> Chapter.get_sections
+      |> Chapter.preload_nodes
+
     course = Course.get_course!(chapter.course_id)
     sections = chapter.sections
 

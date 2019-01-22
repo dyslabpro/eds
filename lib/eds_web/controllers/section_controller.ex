@@ -5,7 +5,9 @@ defmodule EdsWeb.SectionController do
   alias Eds.{Repo}
 
   def show(conn, %{"id" => id}) do
-    section = Section.get_section!(id)
+    section =
+      Section.get_section!(id)
+      |> Section.preload_nodes()
 
     chapter =
       Chapter.get_chapter!(section.chapter_id)

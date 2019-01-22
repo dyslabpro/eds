@@ -17,11 +17,14 @@
       <%= for text <- node.texts do %>
         <!-- Attachment -->
           <div class="attachment-block clearfix">
+            <%= link to: Routes.admin_node_text_path(@conn, :edit, node.id, text.id) do %>
+                  <i class="fa fa-fw fa-edit"></i>
+              <% end %>
             <div class="attachment-pushed">
               <h4 class="attachment-heading"><%= text.title %></h4>
 
               <div class="attachment-text">
-                <%= text.text %>
+                <%= raw(text.text) %>
               </div>
               <!-- /.attachment-text -->
             </div>

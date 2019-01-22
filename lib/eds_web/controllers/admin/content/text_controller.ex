@@ -29,4 +29,33 @@ defmodule EdsWeb.Admin.TextController do
         render(conn, "new.html", changeset: changeset)
     end
   end
+
+  def edit(conn, %{"id" => id}) do
+    text = Text.get!(id)
+    node = Node.get!(text.node_id)
+    changeset = Text.changeset(text, %{})
+
+    render(
+      conn,
+      "edit.html",
+      node_id: node.id,
+      text: text,
+      changeset: changeset
+    )
+  end
+
+  def update(conn, %{"id" => id, "text" => text_params}) do
+    text = Text.get!(id)
+
+    case Text.update(text, text_params) do
+      {:ok, chapter} ->
+        conn
+        |> put_flash(:info, "Text updated successfully.")
+        |> redirect(to: Routes.admin_course_path(conn, :show, chapter.course_id))
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, "edit.html", text: text, changeset: changeset)
+    end
+  end
+
 end

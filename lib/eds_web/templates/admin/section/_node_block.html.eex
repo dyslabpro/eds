@@ -21,7 +21,7 @@
               <h4 class="attachment-heading"><%= text.title %></h4>
 
               <div class="attachment-text">
-                <%= text.text %>
+                <%= raw(text.text) %>
               </div>
               <!-- /.attachment-text -->
             </div>

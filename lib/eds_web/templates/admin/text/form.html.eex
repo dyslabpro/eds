@@ -25,3 +25,6 @@
     <%= submit "Submit", class: "btn btn-primary" %>
   </div>
 <% end %>
+<script>
+    CKEDITOR.replace( 'text[text]' );
+</script>
