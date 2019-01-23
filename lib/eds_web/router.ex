@@ -19,7 +19,8 @@ defmodule EdsWeb.Router do
 
   pipeline :admin do
     plug(:put_layout, {EdsWeb.LayoutView, :admin})
-    plug(Plug.RequireAdmin)
+    plug Plug.RequireAdmin
+    plug NavigationHistory.Tracker
   end
 
   scope "/auth", EdsWeb do

@@ -46,7 +46,8 @@ defmodule Eds.Mixfile do
       {:gettext, "~> 0.11"},
       {:ueberauth_facebook, "~> 0.7"},
       {:faker, "~> 0.11", only: [:dev, :test]},
-      {:ex_machina, "~> 2.0"}
+      {:ex_machina, "~> 2.0"},
+      {:navigation_history, "~> 0.0"}
     ]
   end
 

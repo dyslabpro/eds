@@ -23,7 +23,7 @@ defmodule EdsWeb.Admin.TextController do
       {:ok, text} ->
         conn
         |> put_flash(:info, "Text created successfully.")
-        |> redirect(to: Routes.admin_course_path(conn, :show, conn.params["course_id"]))
+        |> redirect(to: NavigationHistory.last_path(conn, 1))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -51,7 +51,7 @@ defmodule EdsWeb.Admin.TextController do
       {:ok, chapter} ->
         conn
         |> put_flash(:info, "Text updated successfully.")
-        |> redirect(to: Routes.admin_course_path(conn, :show, chapter.course_id))
+        |> redirect(to: NavigationHistory.last_path(conn, 1))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", text: text, changeset: changeset)
