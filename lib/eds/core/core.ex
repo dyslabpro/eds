@@ -5,8 +5,9 @@ defmodule Eds.Core do
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-
       alias Eds.Repo
+
+
 
       def by_weight(query \\ __MODULE__), do: from(q in query, order_by: q.weight)
 

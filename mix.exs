@@ -42,12 +42,15 @@ defmodule Eds.Mixfile do
       {:jason, "~> 1.0"},
       {:phoenix_ecto, "~> 4.0"},
       {:ecto_sql, "~> 3.0"},
+      {:ecto_enum, "~> 1.0"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:ueberauth_facebook, "~> 0.7"},
       {:faker, "~> 0.11", only: [:dev, :test]},
       {:ex_machina, "~> 2.0"},
-      {:navigation_history, "~> 0.0"}
+      {:navigation_history, "~> 0.0"},
+      {:arc_ecto, "~> 0.11.1"},
+      {:httpoison, "~> 1.4"},
     ]
   end
 

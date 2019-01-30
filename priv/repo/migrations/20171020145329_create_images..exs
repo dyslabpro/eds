@@ -1,10 +1,10 @@
-defmodule Eds.Repo.Migrations.CreateTexts do
+defmodule Eds.Repo.Migrations.CreateImages do
   use Ecto.Migration
 
   def change do
-    create table(:texts) do
+    create table(:images) do
       add :title, :string
-      add :text, :text
+      add :image, :string
       add :position, :integer, null: false, default: 0
       add :weight, :integer
       add :node_id, references(:nodes)

@@ -11,6 +11,9 @@
           <%= link to: Routes.admin_node_text_path(@conn, :new, node) do %>
               <i class="fa fa-file-text-o"></i>
           <% end %>
+          <%= link to: Routes.admin_node_image_path(@conn, :new, node) do %>
+              <i class="fa fa-file-image-o"></i>
+          <% end %>
         </div>
       </div>
       
@@ -33,6 +36,26 @@
           <!-- /.attachment-block -->
           <% end %>
 
+      </div>
+      <h4>Images:</h4>
+      <%= for image <- node.images do %>
+      <!-- Attachment -->
+        <div class="attachment-block clearfix">
+          <%= link to: Routes.admin_node_image_path(@conn, :edit, node.id, image.id) do %>
+                <i class="fa fa-fw fa-edit"></i>
+            <% end %>
+          <div class="attachment-pushed">
+            <h4 class="attachment-heading"><%= image.title %></h4>
+
+            <div class="attachment-text">
+              <img src="<%= Eds.Image.url({image.image, image}, :small) |> String.replace_leading("/priv", "") %>" alt="">
+            </div>
+            <!-- /.attachment-text -->
+          </div>
+          <!-- /.attachment-pushed -->
+        </div>
+        <!-- /.attachment-block -->
+        <% end %>
       </div>
       <% end %>
       <%= link "New node", to: Routes.admin_course_node_path(@conn, :new, @course) %>

@@ -1,6 +1,7 @@
 defmodule Eds.Factory do
   use ExMachina.Ecto, repo: Eds.Repo
 
+
   def category_factory do
     %Eds.Core.Category{
       title: Faker.Industry.En.industry
@@ -12,7 +13,7 @@ defmodule Eds.Factory do
       description: Faker.Lorem.paragraph(1..2),
       subtitle: Faker.Lorem.sentence(1..2),
       title: Faker.Lorem.sentence(1..2),
-      chapters: build_list(Enum.random(3..7), :chapter),
+      chapters: build_list(Enum.random(2..4), :chapter),
       nodes: build_list(Enum.random(1..2), :node)
     }
   end
@@ -46,7 +47,7 @@ defmodule Eds.Factory do
     %Eds.Core.Chapter{
       title: Faker.Lorem.sentence(1..2),
       weight: Enum.random(0..11),
-      sections: build_list(Enum.random(3..7), :section),
+      sections: build_list(Enum.random(2..5), :section),
       nodes: build_list(Enum.random(1..2), :node)
     }
   end
@@ -82,8 +83,10 @@ defmodule Eds.Factory do
     %Eds.Content.Node{
       title: Faker.Lorem.sentence(1..2),
       text: Faker.Lorem.paragraph(1..2),
+      layout: Enum.random(0..4),
       weight: Enum.random(0..11),
-      texts: build_list(Enum.random(1..3), :text)
+      texts: build_list(Enum.random(1..3), :text),
+      images: build_list(1, :image),
     }
   end
 
@@ -91,7 +94,20 @@ defmodule Eds.Factory do
     %Eds.Content.Text{
       title: Faker.Lorem.sentence(1..2),
       text: Faker.Lorem.paragraph(2..5),
+      position: Enum.random(0..2),
       weight: Enum.random(0..11),
     }
   end
+
+  def image_factory do
+
+    %Eds.Content.Image{
+      title: Faker.Lorem.sentence(1..2),
+      weight: Enum.random(0..11),
+      position: Enum.random(0..2),
+    }
+  end
+
+
+
 end

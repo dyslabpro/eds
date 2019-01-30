@@ -1,5 +1,4 @@
 <h4>Nodes:</h4>
-
     <%= for node <- @chapter.nodes do %>
       <div class="box box-widget">
         <div class="box-header with-border">
@@ -32,7 +31,26 @@
             </div>
             <!-- /.attachment-block -->
         <% end %>
+        <h4>Images:</h4>
+        <%= for image <- node.images do %>
+          <!-- Attachment -->
+            <div class="attachment-block clearfix">
+              <%= link to: Routes.admin_node_image_path(@conn, :edit, node.id, image.id) do %>
+                    <i class="fa fa-fw fa-edit"></i>
+                <% end %>
+              <div class="attachment-pushed">
+                <h4 class="attachment-heading"><%= image.title %></h4>
 
-      </div>
+                <div class="attachment-text">
+                  <img src="<%= Eds.Image.url({image.image, image}, :small) |> String.replace_leading("/priv", "") %>" alt="">
+                </div>
+                <!-- /.attachment-text -->
+              </div>
+              <!-- /.attachment-pushed -->
+            </div>
+            <!-- /.attachment-block -->
+            <% end %>
+
+        </div>
     <% end %>
     <%= link "New node", to: Routes.admin_chapter_node_path(@conn, :new, @chapter.id) %>

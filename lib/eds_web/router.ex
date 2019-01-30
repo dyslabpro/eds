@@ -43,6 +43,7 @@ defmodule EdsWeb.Router do
 
     resources("/nodes", NodeController) do
       resources("/texts", TextController)
+      resources("/images", ImageController)
     end
 
     resources "/chapters", ChapterController, only: [] do

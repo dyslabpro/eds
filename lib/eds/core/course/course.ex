@@ -2,7 +2,7 @@ defmodule Eds.Core.Course do
   use Ecto.Schema
   import Ecto.Changeset
   alias Eds.Core.{Course, Chapter, CourseCategory, Section}
-  alias Eds.Content.{Node, Text}
+  alias Eds.Content.{Node, Text, Image}
   alias Eds.Accounts.{UserCourse}
   alias Eds.{Repo}
 
@@ -35,7 +35,7 @@ defmodule Eds.Core.Course do
 
   def preload_nodes(course) do
     course
-    |> Repo.preload(nodes: {Node.only_course(), [texts: Text.by_weight()]})
+    |> Repo.preload(nodes: {Node.only_course(), [texts: Text.by_weight(), images: Image.by_weight()]})
   end
 
   def preload_chapters_sections(courses) do

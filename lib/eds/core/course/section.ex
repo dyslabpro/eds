@@ -2,7 +2,7 @@ defmodule Eds.Core.Section do
   use Ecto.Schema
   import Ecto.Changeset
   alias Eds.Core.{Section, Chapter}
-  alias Eds.Content.{Node, Text}
+  alias Eds.Content.{Node, Text, Image}
   alias Eds.{Repo}
   use Eds.Core
 
@@ -19,7 +19,7 @@ defmodule Eds.Core.Section do
 
   def preload_nodes(section) do
     section
-    |> Repo.preload(nodes: [texts: Text.by_weight()])
+    |> Repo.preload(nodes: [texts: Text.by_weight(), images: Image.by_weight()])
   end
 
   def get_section_with_parent(id) do

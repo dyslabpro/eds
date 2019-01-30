@@ -5,9 +5,13 @@ defmodule Eds.Content.Text do
   alias Eds.{Repo}
   import Ecto.Query
   use Eds.Core
+  import EctoEnum
+
+  defenum Position, center: 0, left: 1, right: 2
 
   schema "texts" do
     field(:title, :string)
+    field(:position, Position)
     field(:text, :string)
     field(:weight, :integer)
     belongs_to(:node, Node)
