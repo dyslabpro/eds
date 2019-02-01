@@ -5,13 +5,13 @@ defmodule EdsWeb.CourseController do
   alias Eds.Core.Course
 
   def index(conn, _params) do
-    courses = Core.list_courses()
+    courses = Course.list_courses()
     render(conn, "index.html", courses: courses)
   end
 
   def show(conn, %{"id" => id}) do
     course =
-      Core.get_course!(id)
+    Course.get_course!(id)
       |> Course.preload_chapters_sections()
       |> Course.preload_nodes()
       |> Course.preload_categories()

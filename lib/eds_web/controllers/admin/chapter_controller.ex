@@ -1,18 +1,18 @@
 defmodule EdsWeb.Admin.ChapterController do
   use EdsWeb, :controller
 
-  alias Eds.{Core, Repo}
+  alias Eds.{Repo}
   alias Eds.Core.{Chapter, Course}
 
   def new(conn, params) do
-    changeset = Core.change_chapter(%Chapter{})
+    changeset = Chapter.change_chapter(%Chapter{})
     render(conn, "new.html", changeset: changeset, course_id: params["course_id"])
   end
 
   def create(conn, %{"chapter" => chapter_params}) do
     chapter_params = Map.put_new(chapter_params, "course_id", conn.params["course_id"])
 
-    case Core.create_chapter(chapter_params) do
+    case Chapter.create_chapter(chapter_params) do
       {:ok, chapter} ->
         conn
         |> put_flash(:info, "Chapter created successfully.")
@@ -25,12 +25,12 @@ defmodule EdsWeb.Admin.ChapterController do
 
   def show(conn, %{"id" => id}) do
     chapter =
-      Core.get_chapter!(id)
+    Chapter.get_chapter!(id)
       |> Chapter.get_sections()
       |> Chapter.preload_nodes()
 
     course =
-      Core.get_course!(chapter.course_id)
+    Course.get_course!(chapter.course_id)
       |> Course.preload_chapters_sections()
 
     current_link = %{
@@ -43,8 +43,8 @@ defmodule EdsWeb.Admin.ChapterController do
   end
 
   def edit(conn, %{"id" => id}) do
-    chapter = Core.get_chapter!(id)
-    changeset = Core.change_chapter(chapter)
+    chapter = Chapter.get_chapter!(id)
+    changeset = Chapter.change_chapter(chapter)
 
     render(
       conn,
@@ -56,9 +56,9 @@ defmodule EdsWeb.Admin.ChapterController do
   end
 
   def update(conn, %{"id" => id, "chapter" => chapter_params}) do
-    chapter = Core.get_chapter!(id)
+    chapter = Chapter.get_chapter!(id)
 
-    case Core.update_chapter(chapter, chapter_params) do
+    case Chapter.update_chapter(chapter, chapter_params) do
       {:ok, chapter} ->
         conn
         |> put_flash(:info, "Chapter updated successfully.")
@@ -70,8 +70,8 @@ defmodule EdsWeb.Admin.ChapterController do
   end
 
   def delete(conn, %{"id" => id}) do
-    chapter = Core.get_chapter!(id)
-    {:ok, _chapter} = Core.delete_chapter(chapter)
+    chapter = Chapter.get_chapter!(id)
+    {:ok, _chapter} = Chapter.delete_chapter(chapter)
 
     conn
     |> put_flash(:info, "Chapter deleted successfully.")

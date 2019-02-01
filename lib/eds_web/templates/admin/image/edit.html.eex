@@ -1,0 +1,3 @@
+<h2>Edit Image</h2>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.admin_node_image_path(@conn, :update, @node_id, @image)) %>

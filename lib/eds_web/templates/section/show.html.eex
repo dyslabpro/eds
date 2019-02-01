@@ -13,7 +13,9 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-left">
-        <li><a href="#"><<</a></li>
+        <%= if @prev do %>
+          <li class="previous"><%= link "<<", to: Routes.course_chapter_section_path(@conn, :show, @course.id, @chapter.id, @prev.id) %></li>
+        <% end %>
       </ul>
 
       <ul class="nav navbar-nav">
@@ -29,24 +31,44 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">>></a></li>
+        <%= if @next do %>
+          <li class="next"><%= link ">>", to: Routes.course_chapter_section_path(@conn, :show, @course.id, @chapter.id, @next.id) %></li>
+        <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 
-<h2>Show Section</h2>
 
-<ul>
 
-  <li>
-    <strong>Title:</strong>
-    <%= @section.title %>
-  </li>
 
-</ul>
+<div class="col-md-6">
+    <%= for node <- @section.nodes do %>
+    <div class="box box-widget">
+      <div class="box-header with-border">
+        <h3 class="attachment-heading"><%= node.title %></h3>        
+      </div>
+      
+      <%= for text <- node.texts do %>
+        <!-- Attachment -->
+          <div class="attachment-block clearfix">
+            <div class="attachment-pushed">
+              <h4 class="attachment-heading"><%= text.title %></h4>
 
-<nav aria-label="...">
+              <div class="attachment-text">
+                <%= raw(text.text) %>
+              </div>
+              <!-- /.attachment-text -->
+            </div>
+            <!-- /.attachment-pushed -->
+          </div>
+          <!-- /.attachment-block -->
+          <% end %>
+      </div>
+      <% end %>  
+  </div>
+
+  <nav aria-label="...">
   <ul class="pager">
     <%= if @prev do %>
       <li class="previous"><%= link "Older", to: Routes.course_chapter_section_path(@conn, :show, @course.id, @chapter.id, @prev.id) %></li>

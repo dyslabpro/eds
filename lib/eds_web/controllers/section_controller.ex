@@ -1,19 +1,20 @@
 defmodule EdsWeb.SectionController do
   use EdsWeb, :controller
 
-  alias Eds.Core
-  alias Eds.Core.Section
+  alias Eds.Core.{Course, Chapter, Section}
   alias Eds.{Repo}
 
   def show(conn, %{"id" => id}) do
-    section = Core.get_section!(id)
+    section =
+      Section.get_section!(id)
+      |> Section.preload_nodes()
 
     chapter =
-      Core.get_chapter!(section.chapter_id)
+      Chapter.get_chapter!(section.chapter_id)
       |> Repo.preload(:sections)
 
     sections = chapter.sections
-    course = Core.get_course!(chapter.course_id)
+    course = Course.get_course!(chapter.course_id)
     prev = Section.get_prev_section(section, sections)
     next = Section.get_next_section(section, sections)
 

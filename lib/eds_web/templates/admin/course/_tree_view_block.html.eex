@@ -14,6 +14,8 @@
               <% end %>
             </li>
           <% end %>
+          <%= link "Add new section",  to: Routes.admin_course_chapter_section_path(@conn, :new, @course.id, chapter.id) %>
+                
         </ul>
       </li>
       <% end %>

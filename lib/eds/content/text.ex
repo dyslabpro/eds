@@ -4,17 +4,20 @@ defmodule Eds.Content.Text do
   alias Eds.Content.{Node, Text}
   alias Eds.{Repo}
   import Ecto.Query
+  use Eds.Core
+  import EctoEnum
+
+  defenum Position, center: 0, left: 1, right: 2
 
   schema "texts" do
     field(:title, :string)
+    field(:position, Position)
     field(:text, :string)
     field(:weight, :integer)
     belongs_to(:node, Node)
 
     timestamps()
   end
-
-  def by_weight(query \\ __MODULE__), do: from(q in query, order_by: q.weight)
 
   def create(attrs \\ %{}) do
     %Text{}
@@ -37,7 +40,7 @@ defmodule Eds.Content.Text do
   @doc false
   def changeset(%Text{} = text, attrs) do
     text
-    |> cast(attrs, [:title, :node_id, :text, :weight])
+    |> cast(attrs, [:title, :node_id, :text, :weight, :position])
     |> validate_required([:text])
   end
 end

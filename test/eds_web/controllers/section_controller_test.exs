@@ -1,14 +1,14 @@
 defmodule EdsWeb.SectionControllerTest do
   use EdsWeb.ConnCase
 
-  alias Eds.Core
+  alias Eds.Core.Section
 
   @create_attrs %{title: "some title"}
   @update_attrs %{title: "some updated title"}
   @invalid_attrs %{title: nil}
 
   def fixture(:section) do
-    {:ok, section} = Core.create_section(@create_attrs)
+    {:ok, section} = Section.create_section(@create_attrs)
     section
   end
 

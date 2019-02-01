@@ -1,8 +1,7 @@
 defmodule EdsWeb.Admin.CourseController do
   use EdsWeb, :controller
 
-  alias Eds.{Core, Repo}
-  alias Eds.Core.Course
+  alias Eds.Core.{Course, Category}
 
   def index(conn, _params) do
     courses = Eds.Helpers.AdminHelpers.get_user_courses(conn)
@@ -10,8 +9,8 @@ defmodule EdsWeb.Admin.CourseController do
   end
 
   def new(conn, _params) do
-    changeset = Core.change_course(%Course{})
-    categories = Eds.Repo.all(Eds.Core.Category)
+    changeset = Course.change_course(%Course{})
+    categories = Eds.Repo.all(Category)
     render(conn, "new.html", changeset: changeset, categories: categories)
   end
 
@@ -27,7 +26,7 @@ defmodule EdsWeb.Admin.CourseController do
 
     course_params = Map.put_new(course_params, "user_courses", user_courses)
 
-    case Core.create_course(course_params) do
+    case Course.create_course(course_params) do
       {:ok, course} ->
         conn
         |> put_flash(:info, "Course created successfully.")
@@ -40,7 +39,7 @@ defmodule EdsWeb.Admin.CourseController do
 
   def show(conn, %{"id" => id}) do
     course =
-      Core.get_course!(id)
+    Course.get_course!(id)
       |> Course.preload_chapters_sections()
       |> Course.preload_nodes()
 
@@ -54,15 +53,15 @@ defmodule EdsWeb.Admin.CourseController do
   end
 
   def edit(conn, %{"id" => id}) do
-    course = Core.get_course!(id)
-    changeset = Core.change_course(course)
+    course = Course.get_course!(id)
+    changeset = Course.change_course(course)
     render(conn, "edit.html", course: course, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "course" => course_params}) do
-    course = Core.get_course!(id)
+    course = Course.get_course!(id)
 
-    case Core.update_course(course, course_params) do
+    case Course.update_course(course, course_params) do
       {:ok, course} ->
         conn
         |> put_flash(:info, "Course updated successfully.")
@@ -74,8 +73,8 @@ defmodule EdsWeb.Admin.CourseController do
   end
 
   def delete(conn, %{"id" => id}) do
-    course = Core.get_course!(id)
-    {:ok, _course} = Core.delete_course(course)
+    course = Course.get_course!(id)
+    {:ok, _course} = Course.delete_course(course)
 
     conn
     |> put_flash(:info, "Course deleted successfully.")

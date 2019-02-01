@@ -5,6 +5,8 @@ defmodule Eds.Repo.Migrations.CreateNodes do
     create table(:nodes) do
       add :title, :string
       add :text, :text
+      add :layout, :integer, null: false, default: 0
+      add :weight, :integer
       add :course_id, references(:courses)
       add :chapter_id, references(:chapters)
       add :section_id, references(:sections)

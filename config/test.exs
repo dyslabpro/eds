@@ -17,3 +17,6 @@ config :eds, Eds.Repo,
   database: "eds_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+  config :arc,
+  storage_dir: "priv/uploads"
