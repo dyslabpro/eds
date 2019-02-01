@@ -12,6 +12,11 @@
   </div>
 
   <div class="form-group">
+    <%= label(f, :type, "Position") %>
+    <%= select(f, :position, position_options(), class: "ui fluid dropdown") %>
+  </div>
+
+  <div class="form-group">
     <%= file_input(f, :image) %>
   </div>
 

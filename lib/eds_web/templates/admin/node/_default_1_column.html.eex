@@ -1,0 +1,23 @@
+<div class="box box-widget">
+    <div class="box-header with-border">
+        <h3 class="attachment-heading"><%= @node.title %>: <%= @node.layout %></h3>
+        <div class="box-tools">
+            <%= link to: EdsWeb.Admin.NodeView.node_edit_path(@node, @conn) do %>
+              <i class="fa fa-fw fa-edit"></i>
+            <% end %>
+            <%= link to: Routes.admin_node_text_path(@conn, :new, @node) do %>
+                <i class="fa fa-file-text-o"></i>
+            <% end %>
+            <%= link to: Routes.admin_node_image_path(@conn, :new, @node) do %>
+                <i class="fa fa-file-image-o"></i>
+            <% end %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 center">
+            <%= for content <- @node.content.center do %>
+            <%=  render_node_content(assigns, content) %>
+            <% end %>
+        </div>
+    </div>
+</div>

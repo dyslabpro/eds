@@ -1,61 +1,6 @@
-<h4>Nodes:</h4>
-
-    <%= for node <- @course.nodes do %>
-    <div class="box box-widget">
-      <div class="box-header with-border">
-        <h3 class="attachment-heading"><%= node.title %></h3>
-        <div class="box-tools">
-          <%= link to: Routes.admin_course_node_path(@conn, :edit, @course.id, node.id) do %>
-              <i class="fa fa-fw fa-edit"></i>
-          <% end %>
-          <%= link to: Routes.admin_node_text_path(@conn, :new, node) do %>
-              <i class="fa fa-file-text-o"></i>
-          <% end %>
-          <%= link to: Routes.admin_node_image_path(@conn, :new, node) do %>
-              <i class="fa fa-file-image-o"></i>
-          <% end %>
-        </div>
-      </div>
-      
-      <%= for text <- node.texts do %>
-        <!-- Attachment -->
-          <div class="attachment-block clearfix">
-            <%= link to: Routes.admin_node_text_path(@conn, :edit, node.id, text.id) do %>
-                  <i class="fa fa-fw fa-edit"></i>
-              <% end %>
-            <div class="attachment-pushed">
-              <h4 class="attachment-heading"><%= text.title %></h4>
-
-              <div class="attachment-text">
-                <%= raw(text.text) %>
-              </div>
-              <!-- /.attachment-text -->
-            </div>
-            <!-- /.attachment-pushed -->
-          </div>
-          <!-- /.attachment-block -->
-          <% end %>
-
-      </div>
-      <h4>Images:</h4>
-      <%= for image <- node.images do %>
-      <!-- Attachment -->
-        <div class="attachment-block clearfix">
-          <%= link to: Routes.admin_node_image_path(@conn, :edit, node.id, image.id) do %>
-                <i class="fa fa-fw fa-edit"></i>
-            <% end %>
-          <div class="attachment-pushed">
-            <h4 class="attachment-heading"><%= image.title %></h4>
-
-            <div class="attachment-text">
-              <img src="<%= Eds.Image.url({image.image, image}, :small) |> String.replace_leading("/priv", "") %>" alt="">
-            </div>
-            <!-- /.attachment-text -->
-          </div>
-          <!-- /.attachment-pushed -->
-        </div>
-        <!-- /.attachment-block -->
-        <% end %>
-      </div>
-      <% end %>
-      <%= link "New node", to: Routes.admin_course_node_path(@conn, :new, @course) %>
+<%= for node <- @course.nodes do %>
+  <%= link "New node", to: Routes.admin_course_node_path(@conn, :new, @course) %>
+  <%= render(NodeView, NodeView.node_layout(node), Map.put(assigns, :node, NodeView.prepare_content(node))) %>
+  <%= link "New node", to: Routes.admin_course_node_path(@conn, :new, @course) %>
+<% end %>
+  

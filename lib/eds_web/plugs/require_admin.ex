@@ -16,7 +16,7 @@ defmodule EdsWeb.Plug.RequireAdmin do
     else
       conn
       |> put_flash(:error, "Admins only!")
-      |> redirect(to: Helpers.user_path(conn, :home_page))
+      |> redirect(to: Helpers.page_path(conn, :home))
       |> halt()
     end
   end

@@ -66,27 +66,27 @@ images = insert_list(200, :image)
 
 images = Eds.Repo.all(Eds.Content.Image)
 
-# Enum.each(images, fn image ->
-#   url = "http://placeimg.com/640/360/any"
-#   file_name = "test.jpg"
-#   file_body = Eds.Tools.download(url)
+Enum.each(images, fn image ->
+  url = "http://placeimg.com/640/360/any"
+  file_name = "test.jpg"
+  file_body = Eds.Tools.download(url)
 
-#   if file_body do
-#     File.write!("/tmp/#{file_name}", file_body)
+  if file_body do
+    File.write!("/tmp/#{file_name}", file_body)
 
-#     image_params = %{
-#       title: image.title,
-#       weight: image.weight,
-#       image: %Plug.Upload{
-#         content_type: "image/jpg",
-#         filename: file_name,
-#         path: "/tmp/#{file_name}"
-#       }
-#     }
+    image_params = %{
+      title: image.title,
+      weight: image.weight,
+      image: %Plug.Upload{
+        content_type: "image/jpg",
+        filename: file_name,
+        path: "/tmp/#{file_name}"
+      }
+    }
 
-#     Eds.Content.Image.image_changeset(image, image_params) |> Repo.update()
-#     File.rm!("/tmp/#{file_name}")
-#   end
-# end)
+    Eds.Content.Image.image_changeset(image, image_params) |> Repo.update()
+    File.rm!("/tmp/#{file_name}")
+  end
+end)
 
 

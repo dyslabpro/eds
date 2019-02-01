@@ -40,7 +40,7 @@ defmodule Eds.Content.Text do
   @doc false
   def changeset(%Text{} = text, attrs) do
     text
-    |> cast(attrs, [:title, :node_id, :text, :weight])
+    |> cast(attrs, [:title, :node_id, :text, :weight, :position])
     |> validate_required([:text])
   end
 end

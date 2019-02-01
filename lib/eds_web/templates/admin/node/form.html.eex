@@ -10,6 +10,12 @@
     <%= text_input f, :title, class: "form-control" %>
     <%= error_tag f, :title %>
   </div>
+
+  <div class="form-group">
+    <%= label(f, :layout, "Layout") %>
+    <%= select(f, :layout, layout_options(), class: "ui fluid dropdown") %>
+  </div>
+
   <div class="form-group">
     <%= label f, :weight, class: "control-label" %>
     <%= text_input f, :weight, class: "form-control" %>

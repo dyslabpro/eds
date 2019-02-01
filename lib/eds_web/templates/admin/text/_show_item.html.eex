@@ -1,0 +1,14 @@
+<div class="attachment-block clearfix">
+    <%= link to: Routes.admin_node_text_path(@conn, :edit, @text.node_id, @text.id) do %>
+            <i class="fa fa-fw fa-edit"></i>
+        <% end %>
+    <div class="attachment-pushed-text">
+        <h4 class="attachment-heading"><%= @text.title %> - <%= @text.position %> - <%= @text.weight %></h4>
+
+        <div class="attachment-text">
+        <%= raw(@text.text) %>
+        </div>
+        <!-- /.attachment-text -->
+    </div>
+<!-- /.attachment-pushed -->
+</div>

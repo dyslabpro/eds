@@ -41,7 +41,7 @@ defmodule Eds.Content.Image do
   @doc false
   def changeset(%Image{} = image, attrs) do
     image
-    |> cast(attrs, [:title, :node_id, :weight])
+    |> cast(attrs, [:title, :node_id, :weight, :position])
     |> validate_required([:node_id])
   end
 

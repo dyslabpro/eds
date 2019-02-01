@@ -7,7 +7,7 @@ defmodule Eds.Content.Node do
   alias Eds.{Repo}
   import Ecto.Query
 
-  defenum Layout, default_1_column: 0, default_2_columns_50_50: 1, default_2_columns_25_75: 2, default_2_columns_75_35: 3, default_3_columns_33_33_33: 4
+  defenum Layout, default_1_column: 0, default_2_columns_50_50: 1, default_2_columns_25_75: 2, default_2_columns_75_25: 3, default_3_columns_33_33_33: 4
 
 
   schema "nodes" do
@@ -65,7 +65,8 @@ defmodule Eds.Content.Node do
       :text,
       :published,
       :published_at,
-      :weight
+      :weight,
+      :layout
     ])
     |> validate_required([:title])
   end

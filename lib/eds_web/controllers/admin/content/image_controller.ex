@@ -32,30 +32,30 @@ defmodule EdsWeb.Admin.ImageController do
   end
 
   def edit(conn, %{"id" => id}) do
-    text = Image.get!(id)
-    node = Node.get!(text.node_id)
-    changeset = Image.changeset(text, %{})
+    image = Image.get!(id)
+    node = Node.get!(image.node_id)
+    changeset = Image.changeset(image, %{})
 
     render(
       conn,
       "edit.html",
       node_id: node.id,
-      text: text,
+      image: image,
       changeset: changeset
     )
   end
 
-  def update(conn, %{"id" => id, "text" => text_params}) do
-    text = Image.get!(id)
+  def update(conn, %{"id" => id, "image" => image_params}) do
+    image = Image.get!(id)
 
-    case Image.update(text, text_params) do
+    case Image.update(image, image_params) do
       {:ok, image} ->
         conn
         |> put_flash(:info, "Text updated successfully.")
         |> redirect(to: NavigationHistory.last_path(conn, 1))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", text: text, changeset: changeset)
+        render(conn, "edit.html", image: image, changeset: changeset)
     end
   end
 
