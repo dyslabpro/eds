@@ -1,0 +1,9 @@
+<div class="attachment-block clearfix">
+    <div class="attachment-pushed-text">
+        <div class="attachment-text">
+        <%= raw(@text.text) %>
+        </div>
+        <!-- /.attachment-text -->
+    </div>
+<!-- /.attachment-pushed -->
+</div>

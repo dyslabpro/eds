@@ -5,10 +5,9 @@ defmodule Eds.Content.Image do
   alias Eds.Content.{Node, Image}
   alias Eds.{Repo}
   import Ecto.Query
-  import EctoEnum
-  use Eds.Core
+  use Eds.Content
 
-  defenum Position, center: 0, left: 1, right: 2
+
 
   schema "images" do
     field(:title, :string)
@@ -43,6 +42,7 @@ defmodule Eds.Content.Image do
     image
     |> cast(attrs, [:title, :node_id, :weight, :position])
     |> validate_required([:node_id])
+    |> validate_position()
   end
 
   def image_changeset(image, attrs) do

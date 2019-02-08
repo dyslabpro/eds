@@ -1,29 +1,8 @@
-defmodule EdsWeb.Admin.NodeView do
-  use EdsWeb, :admin_view
+defmodule EdsWeb.NodeView do
+  use EdsWeb, :public_view
   alias Eds.Content.Node
-  alias EdsWeb.Admin.{TextView, ImageView}
+  alias EdsWeb.{TextView, ImageView}
 
-  def node_layout(node) do
-    case node.layout do
-      :default_1_column ->
-        "_default_1_column.html"
-
-      :default_2_columns_50_50 ->
-        "_default_2_columns_50_50.html"
-
-      :default_2_columns_25_75 ->
-        "_default_2_columns_25_75.html"
-
-      :default_2_columns_75_25 ->
-        "_default_2_columns_75_25.html"
-
-      :default_3_columns_33_33_33 ->
-        "_default_3_columns_33_33_33.html"
-
-      _else ->
-        "show.html"
-    end
-  end
 
   def prepare_content(node) do
     left =
@@ -82,27 +61,4 @@ defmodule EdsWeb.Admin.NodeView do
     end
   end
 
-  def node_edit_or_update_path(node, conn, action \\ :edit) do
-    path =
-      cond do
-        node.section_id ->
-          Routes.admin_section_node_path(conn, action, node.section_id, node.id)
-
-        node.chapter_id ->
-          Routes.admin_chapter_node_path(conn, action, node.chapter_id, node.id)
-
-        node.course_id ->
-          Routes.admin_course_node_path(conn, action, node.course_id, node.id)
-
-        true ->
-          "/admin"
-      end
-  end
-
-
-
-  def layout_options do
-    Eds.Content.Node.Layout.__enum_map__()
-    |> Enum.map(fn {k, _v} -> {String.capitalize(Atom.to_string(k)), k} end)
-  end
 end

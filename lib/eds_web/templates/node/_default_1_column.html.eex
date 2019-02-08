@@ -1,0 +1,9 @@
+<div class="box box-widget">
+    <div class="row">
+        <div class="col-lg-12 center">
+            <%= for content <- @node.content.center do %>
+            <%=  render_node_content(assigns, content) %>
+            <% end %>
+        </div>
+    </div>
+</div>

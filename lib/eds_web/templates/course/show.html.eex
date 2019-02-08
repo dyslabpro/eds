@@ -8,7 +8,7 @@
   <% end %>
 </ul>
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-3">
     <ul>
     <%= for chapter <- @chapters do %>
       <li><%= link chapter.title, to: Routes.course_chapter_path(@conn, :show, @course.id, chapter.id) %>
@@ -23,30 +23,10 @@
     <% end %>
     </ul>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-9">
     <%= for node <- @course.nodes do %>
-    <div class="box box-widget">
-      <div class="box-header with-border">
-        <h3 class="attachment-heading"><%= node.title %></h3>        
-      </div>
-      
-      <%= for text <- node.texts do %>
-        <!-- Attachment -->
-          <div class="attachment-block clearfix">
-            <div class="attachment-pushed">
-              <h4 class="attachment-heading"><%= text.title %></h4>
-
-              <div class="attachment-text">
-                <%= raw(text.text) %>
-              </div>
-              <!-- /.attachment-text -->
-            </div>
-            <!-- /.attachment-pushed -->
-          </div>
-          <!-- /.attachment-block -->
-          <% end %>
-      </div>
-      <% end %>  
+      <%= render(EdsWeb.NodeView, EdsWeb.Admin.NodeView.node_layout(node), Map.put(assigns, :node, EdsWeb.NodeView.prepare_content(node))) %>
+    <% end %>
   </div>
 </div>
 

@@ -1,6 +1,0 @@
-<%= for node <- @chapter.nodes do %>
-    <%= link "New node", to: Routes.admin_chapter_node_path(@conn, :new, @chapter.id) %>
-    <%= render(NodeView, NodeView.node_layout(node), conn: @conn, node: NodeView.prepare_content(node)) %>
-    <%= link "New node", to: Routes.admin_chapter_node_path(@conn, :new, @chapter.id) %>  
-<% end %>
- 

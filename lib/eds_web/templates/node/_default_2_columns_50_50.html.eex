@@ -1,0 +1,14 @@
+<div class="box box-widget">
+    <div class="row">
+        <div class="col-lg-6 left">
+            <%= for content <- @node.content.left do %>
+                <%=  render_node_content(assigns, content) %>
+            <% end %>
+        </div>
+        <div class="col-lg-6 right">
+            <%= for content <- @node.content.right do %>
+            <%=  render_node_content(assigns, content) %>
+            <% end %>
+        </div>
+    </div>
+</div>

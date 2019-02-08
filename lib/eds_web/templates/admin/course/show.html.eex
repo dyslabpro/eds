@@ -9,13 +9,17 @@
 
   <span><%= link "Edit", to: Routes.course_path(@conn, :edit, @course) %></span>
   <span><%= link "Back", to: Routes.course_path(@conn, :index) %></span>
-</div>
-<div class="col-lg-9 connectedSortable">
-  <ul>
-    <li><strong>Title: </strong><%= @course.title %></li>
-    <li><strong>Subtitle: </strong><%= @course.subtitle %></li>
-  </ul>
+  </div>
+  <div class="col-lg-9 connectedSortable">
+    <ul>
+      <li><strong>Title: </strong><%= @course.title %></li>
+      <li><strong>Subtitle: </strong><%= @course.subtitle %></li>
+    </ul>
 
-  <%= render("_node_block.html", assigns) %>
-</div>
+    <%= for node <- @course.nodes do %>
+      <%= link "New node", to: Routes.admin_course_node_path(@conn, :new, @course) %>
+      <%= render(NodeView, NodeView.node_layout(node), Map.put(assigns, :node, NodeView.prepare_content(node))) %>
+      <%= link "New node", to: Routes.admin_course_node_path(@conn, :new, @course) %>
+    <% end %>
+  </div>
 </div>

@@ -4,10 +4,7 @@ defmodule Eds.Content.Text do
   alias Eds.Content.{Node, Text}
   alias Eds.{Repo}
   import Ecto.Query
-  use Eds.Core
-  import EctoEnum
-
-  defenum Position, center: 0, left: 1, right: 2
+  use Eds.Content
 
   schema "texts" do
     field(:title, :string)
@@ -41,6 +38,7 @@ defmodule Eds.Content.Text do
   def changeset(%Text{} = text, attrs) do
     text
     |> cast(attrs, [:title, :node_id, :text, :weight, :position])
-    |> validate_required([:text])
+    |> validate_required([:text, :node_id, :position])
+    |> validate_position()
   end
 end

@@ -18,28 +18,8 @@
   <% end %>
 </ul>
 
-<div class="col-md-6">
-    <%= for node <- @chapter.nodes do %>
-    <div class="box box-widget">
-      <div class="box-header with-border">
-        <h3 class="attachment-heading"><%= node.title %></h3>        
-      </div>
-      
-      <%= for text <- node.texts do %>
-        <!-- Attachment -->
-          <div class="attachment-block clearfix">
-            <div class="attachment-pushed">
-              <h4 class="attachment-heading"><%= text.title %></h4>
-
-              <div class="attachment-text">
-                <%= raw(text.text) %>
-              </div>
-              <!-- /.attachment-text -->
-            </div>
-            <!-- /.attachment-pushed -->
-          </div>
-          <!-- /.attachment-block -->
-          <% end %>
-      </div>
-      <% end %>  
-  </div>
+<div class="col-md-12">
+  <%= for node <- @chapter.nodes do %>
+    <%= render(EdsWeb.NodeView, EdsWeb.Admin.NodeView.node_layout(node), Map.put(assigns, :node, EdsWeb.NodeView.prepare_content(node))) %>
+  <% end %>  
+</div>

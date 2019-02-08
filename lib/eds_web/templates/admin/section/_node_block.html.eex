@@ -1,7 +1,0 @@
-<%= link "New node", to: Routes.admin_section_node_path(@conn, :new, @section.id) %>
-<%= for node <- @section.nodes do %>
-  <%= link "New node", to: Routes.admin_section_node_path(@conn, :new, @section.id) %>
-  <%= render(NodeView, NodeView.node_layout(node), conn: @conn, node: NodeView.prepare_content(node)) %>
-<% end %>
-
-

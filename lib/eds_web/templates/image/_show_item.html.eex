@@ -1,0 +1,9 @@
+<div class="attachment-block clearfix">
+    <div class="attachment-pushed-img">
+        <div class="attachment-image">
+            <img src="<%= Eds.Image.url({@image.image, @image}, :small) |> String.replace_leading("/priv", "") %>" alt="">
+        </div>
+    <!-- /.attachment-text -->
+    </div>
+    <!-- /.attachment-pushed -->
+</div>
