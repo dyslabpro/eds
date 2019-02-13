@@ -34,6 +34,10 @@ defmodule Eds.Content.Text do
     |> Repo.update()
   end
 
+  def delete(%Text{} = text) do
+    Repo.delete(text)
+  end
+
   @doc false
   def changeset(%Text{} = text, attrs) do
     text

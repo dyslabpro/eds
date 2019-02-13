@@ -1,12 +1,18 @@
-<div class="attachment-block clearfix">
-    <%= link to: Routes.admin_node_text_path(@conn, :edit, @text.node_id, @text.id) do %>
-            <i class="fa fa-fw fa-edit"></i>
-        <% end %>
-    <div class="attachment-pushed-text">
-        <h4 class="attachment-heading"><%= @text.title %> - <%= @text.position %> - <%= @text.weight %></h4>
-
+<div class="box box-primary">
+    <div class="box-header with-border bg-gray">
+    <h3 class="box-title"><%= @text.title %></h3>
+        <div class="box-tools pull-right">
+            <%= link to: Routes.admin_node_text_path(@conn, :edit, @text.node_id, @text.id) do %>
+                <i class="fa fa-fw fa-edit"></i>
+            <% end %>
+            <%= link to: Routes.admin_node_text_path(@conn, :delete, @text.node_id, @text.id), method: :delete do %>
+                <i class="fa fa-fw fa-trash-o"></i>
+            <% end %>
+        </div>
+    </div>
+    <div class="box-body">
         <div class="attachment-text">
-        <%= raw(@text.text) %>
+            <%= raw(@text.text) %>
         </div>
         <!-- /.attachment-text -->
     </div>

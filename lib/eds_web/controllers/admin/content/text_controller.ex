@@ -48,7 +48,7 @@ defmodule EdsWeb.Admin.TextController do
     text = Text.get!(id)
 
     case Text.update(text, text_params) do
-      {:ok, chapter} ->
+      {:ok, text} ->
         conn
         |> put_flash(:info, "Text updated successfully.")
         |> redirect(to: NavigationHistory.last_path(conn, 1))
@@ -56,6 +56,14 @@ defmodule EdsWeb.Admin.TextController do
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", text: text, changeset: changeset)
     end
+  end
+
+  def delete(conn, %{"id" => id}) do
+    text = Text.get!(id)
+    {:ok, _text} = Text.delete(text)
+    conn
+    |> put_flash(:info, "Text deleted successfully.")
+    |> redirect(to: NavigationHistory.last_path(conn, 2))
   end
 
 end

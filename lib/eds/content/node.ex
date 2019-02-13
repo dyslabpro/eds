@@ -3,7 +3,7 @@ defmodule Eds.Content.Node do
   import EctoEnum
   import Ecto.Changeset
   alias Eds.Core.{Chapter, Course, Section}
-  alias Eds.Content.{Node, Text, Image}
+  alias Eds.Content.{Node, Text, Image, QuizQuestion}
   alias Eds.{Repo}
   import Ecto.Query
 
@@ -27,6 +27,7 @@ defmodule Eds.Content.Node do
     belongs_to(:chapter, Chapter)
     has_many(:texts, Text, on_delete: :delete_all)
     has_many(:images, Image, on_delete: :delete_all)
+    has_many(:quiz_questions, QuizQuestion, on_delete: :delete_all)
 
     timestamps()
   end

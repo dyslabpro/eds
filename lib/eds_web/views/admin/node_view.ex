@@ -1,7 +1,7 @@
 defmodule EdsWeb.Admin.NodeView do
   use EdsWeb, :admin_view
   alias Eds.Content.Node
-  alias EdsWeb.Admin.{TextView, ImageView}
+  alias EdsWeb.Admin.{TextView, ImageView, QuizQuestionView}
 
   def node_layout(node) do
     case node.layout do
@@ -32,7 +32,11 @@ defmodule EdsWeb.Admin.NodeView do
        end) ++
          Enum.filter(node.images, fn image ->
            image.position == :left
-         end))
+         end) ++
+         Enum.filter(node.quiz_questions, fn quiz_question ->
+          quiz_question.position == :left
+        end)
+        )
       |> Enum.sort_by(& &1.weight)
 
     right =
@@ -41,7 +45,10 @@ defmodule EdsWeb.Admin.NodeView do
        end) ++
          Enum.filter(node.images, fn image ->
            image.position == :right
-         end))
+         end) ++
+         Enum.filter(node.quiz_questions, fn quiz_question ->
+          quiz_question.position == :right
+        end))
       |> Enum.sort_by(& &1.weight)
 
     center =
@@ -50,7 +57,10 @@ defmodule EdsWeb.Admin.NodeView do
        end) ++
          Enum.filter(node.images, fn image ->
            image.position == :center
-         end))
+         end) ++
+         Enum.filter(node.quiz_questions, fn quiz_question ->
+          quiz_question.position == :center
+        end))
       |> Enum.sort_by(& &1.weight)
 
     node =
@@ -79,6 +89,9 @@ defmodule EdsWeb.Admin.NodeView do
 
       "images" ->
         render(ImageView, "_show_item.html", Map.put(assigns, :image, content))
+
+      "quiz_questions" ->
+        render(QuizQuestionView, "_show_item.html", Map.put(assigns, :quiz_question, content))
     end
   end
 

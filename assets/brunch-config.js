@@ -14,6 +14,7 @@ exports.config = {
           "vendor/js/bootstrap.min.js"
         ],
         "js/admin.js": [
+            "js/app.js",
             "vendor/js/jquery.min.js",
             "vendor/js/jquery-ui.min.js",
             "vendor/js/bootstrap.min.js",

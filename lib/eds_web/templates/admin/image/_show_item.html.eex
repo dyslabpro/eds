@@ -1,13 +1,16 @@
-<div class="attachment-block clearfix">
-    <%= link to: Routes.admin_node_image_path(@conn, :edit, @image.node_id, @image) do %>
-        <i class="fa fa-fw fa-edit"></i>
-    <% end %>
-    <div class="attachment-pushed-img">
-        <h4 class="attachment-heading"><%= @image.title %> - <%= @image.position %> - <%= @image.weight %></h4>
-
-        <div class="attachment-image">
-            <img src="<%= Eds.Image.url({@image.image, @image}, :small) |> String.replace_leading("/priv", "") %>" alt="">
+<div class="box">
+<div class="box-header with-border bg-gray">
+        <h3 class="box-title"><%= @image.title %></h3>
+        <div class="box-tools pull-right btn-group">
+            <%= link to: Routes.admin_node_image_path(@conn, :edit, @image.node_id, @image) do %>
+                <i class="fa fa-fw fa-edit"></i>
+            <% end %>
         </div>
+    </div>
+    
+    <div class="box-body">
+        <img class="img-responsive" src="<%= Eds.Image.url({@image.image, @image}, :small) |> String.replace_leading("/priv", "") %>" alt="">
+
     <!-- /.attachment-text -->
     </div>
     <!-- /.attachment-pushed -->

@@ -17,9 +17,9 @@
     </ul>
 
     <%= for node <- @course.nodes do %>
-      <%= link "New node", to: Routes.admin_course_node_path(@conn, :new, @course) %>
+      <%= link "New node", to: Routes.admin_course_node_path(@conn, :new, @course), class: "btn btn-success"  %>
       <%= render(NodeView, NodeView.node_layout(node), Map.put(assigns, :node, NodeView.prepare_content(node))) %>
-      <%= link "New node", to: Routes.admin_course_node_path(@conn, :new, @course) %>
+      <%= link "New node", to: Routes.admin_course_node_path(@conn, :new, @course), class: "btn btn-success" %>
     <% end %>
   </div>
 </div>

@@ -6,9 +6,9 @@
       <%= render(EdsWeb.Admin.CourseView, "_tree_view_block.html", assigns) %>
   </section>
   <section class="col-lg-9 connectedSortable">
-    <%= link "New node", to: Routes.admin_section_node_path(@conn, :new, @section.id) %>
+    <%= link "New node", to: Routes.admin_section_node_path(@conn, :new, @section.id), class: "btn btn-success" %>
     <%= for node <- @section.nodes do %>
-      <%= link "New node", to: Routes.admin_section_node_path(@conn, :new, @section.id) %>
+      <%= link "New node", to: Routes.admin_section_node_path(@conn, :new, @section.id), class: "btn btn-success" %>
       <%= render(NodeView, NodeView.node_layout(node), conn: @conn, node: NodeView.prepare_content(node)) %>
     <% end %>
 

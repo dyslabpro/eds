@@ -11,9 +11,12 @@
             <%= link to: Routes.admin_node_image_path(@conn, :new, @node) do %>
                 <i class="fa fa-file-image-o"></i>
             <% end %>
+            <%= link to: Routes.admin_node_quiz_question_path(@conn, :new, @node) do %>
+                <i class="fa fa-list-ol"></i>
+            <% end %>
         </div>
     </div>
-    <div class="row">
+    <div class="row box-body">
         <div class="col-lg-9 left">
             <%= for content <- @node.content.left do %>
                 <%=  render_node_content(assigns, content) %>
