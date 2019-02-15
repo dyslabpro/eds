@@ -5,7 +5,7 @@
             <%= link to: Routes.admin_node_text_path(@conn, :edit, @text.node_id, @text.id) do %>
                 <i class="fa fa-fw fa-edit"></i>
             <% end %>
-            <%= link to: Routes.admin_node_text_path(@conn, :delete, @text.node_id, @text.id), method: :delete do %>
+            <%= link to: Routes.admin_node_text_path(@conn, :delete, @text.node_id, @text.id), method: :delete, data: [confirm: "Really?"] do %>
                 <i class="fa fa-fw fa-trash-o"></i>
             <% end %>
         </div>

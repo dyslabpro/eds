@@ -5,6 +5,9 @@
             <%= link to: Routes.admin_node_image_path(@conn, :edit, @image.node_id, @image) do %>
                 <i class="fa fa-fw fa-edit"></i>
             <% end %>
+            <%= link to: Routes.admin_node_image_path(@conn, :delete, @image.node_id, @image.id), method: :delete, data: [confirm: "Really?"] do %>
+                <i class="fa fa-fw fa-trash-o"></i>
+            <% end %>
         </div>
     </div>
     

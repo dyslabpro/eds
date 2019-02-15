@@ -37,6 +37,10 @@ defmodule Eds.Content.Image do
     |> Repo.update()
   end
 
+  def delete(%Image{} = image) do
+    Repo.delete(image)
+  end
+
   @doc false
   def changeset(%Image{} = image, attrs) do
     image

@@ -59,4 +59,12 @@ defmodule EdsWeb.Admin.ImageController do
     end
   end
 
+  def delete(conn, %{"id" => id}) do
+    image = Image.get!(id)
+    {:ok, _image} = Image.delete(image)
+    conn
+    |> put_flash(:info, "Image deleted successfully.")
+    |> redirect(to: NavigationHistory.last_path(conn, 2))
+  end
+
 end
