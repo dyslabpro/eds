@@ -13,6 +13,7 @@ import css from "./admin.css"
 // to also remove its path from "config.paths.watched".
 import 'jquery';
 import 'bootstrap';
+import 'admin-lte';
 import "phoenix_html"
 
 

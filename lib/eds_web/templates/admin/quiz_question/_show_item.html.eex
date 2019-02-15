@@ -2,9 +2,14 @@
     <div class="box-header with-border bg-gray">
         <h3 class="box-title"><%= @quiz_question.title %></h3>
         <div class="box-tools pull-right btn-group">
-            <%= link to: Routes.admin_node_quiz_question_path(@conn, :edit, @quiz_question.node_id, @quiz_question.id) do %>
-                <i class="fa fa-edit"></i>
-            <% end %>
+            <div class="btn-group">
+                <%= link to: Routes.admin_node_quiz_question_path(@conn, :edit, @quiz_question.node_id, @quiz_question.id), class: "btn btn-default" do %>
+                    <i class="fa fa-edit"></i>
+                <% end %>
+                <%= link to: Routes.admin_node_quiz_question_path(@conn, :delete, @quiz_question.node_id, @quiz_question.id), class: "btn btn-default", method: :delete, data: [confirm: "Really?"] do %>
+                    <i class="fa fa-fw fa-trash-o"></i>
+                <% end %>
+            </div>
         </div>
     </div>
     <div class="box-body">       

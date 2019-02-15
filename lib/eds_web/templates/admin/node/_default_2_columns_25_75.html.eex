@@ -1,30 +1,19 @@
 <div class="box box-widget">
     <div class="box-header with-border">
-        <h3 class="attachment-heading"><%= @node.title %>: <%= @node.layout %></h3>
+        <h4 class="attachment-heading"><%= @node.title %></h4>
         <div class="box-tools">
-            <%= link to: EdsWeb.Admin.NodeView.node_edit_or_update_path(@node, @conn) do %>
-              <i class="fa fa-fw fa-edit"></i>
-            <% end %>
-            <%= link to: Routes.admin_node_text_path(@conn, :new, @node) do %>
-                <i class="fa fa-file-text-o"></i>
-            <% end %>
-            <%= link to: Routes.admin_node_image_path(@conn, :new, @node) do %>
-                <i class="fa fa-file-image-o"></i>
-            <% end %>
-            <%= link to: Routes.admin_node_quiz_question_path(@conn, :new, @node) do %>
-                <i class="fa fa-list-ol"></i>
-            <% end %>
+           <%= render("_box_tools.html", assigns) %>
         </div>
     </div>
     <div class="row box-body">
-        <div class="col-lg-3 left box-body">
+        <div class="col-lg-3 left box-body node-content">
             <%= for content <- @node.content.left do %>
                 <%=  render_node_content(assigns, content) %>
             <% end %>
         </div>
-        <div class="col-lg-9 right box-body">
+        <div class="col-lg-9 right box-body node-content">
             <%= for content <- @node.content.right do %>
-            <%=  render_node_content(assigns, content) %>
+                <%=  render_node_content(assigns, content) %>
             <% end %>
         </div>
     </div>

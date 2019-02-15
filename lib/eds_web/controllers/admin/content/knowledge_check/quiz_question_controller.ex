@@ -58,4 +58,12 @@ defmodule EdsWeb.Admin.QuizQuestionController do
     end
   end
 
+  def delete(conn, %{"id" => id}) do
+    quiz_question = QuizQuestion.get!(id)
+    {:ok, _quiz_question} = QuizQuestion.delete(quiz_question)
+    conn
+    |> put_flash(:info, "QuizQuestion deleted successfully.")
+    |> redirect(to: NavigationHistory.last_path(conn, 2))
+  end
+
 end

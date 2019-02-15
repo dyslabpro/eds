@@ -35,6 +35,10 @@ defmodule Eds.Content.QuizQuestion do
     |> Repo.update()
   end
 
+  def delete(%QuizQuestion{} = quiz_question) do
+    Repo.delete(quiz_question)
+  end
+
   @doc false
   def changeset(%QuizQuestion{} = quiz_question, attrs) do
     quiz_question
