@@ -4,7 +4,7 @@ defmodule EdsWeb.Admin.CourseController do
   alias Eds.Core.{Course, Category}
 
   def index(conn, _params) do
-    courses = Eds.Helpers.AdminHelpers.get_user_courses(conn)
+    courses = EdsWeb.Helpers.AdminHelpers.get_user_courses(conn)
     render(conn, "index.html", courses: courses)
   end
 
