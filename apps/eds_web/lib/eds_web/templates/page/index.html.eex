@@ -1,0 +1,18 @@
+<h2>Listing Courses</h2>
+
+<div class="row">
+  <%= for course <- @courses do %>
+  <div class="col-sm-4 col-lg-4 col-md-4">
+      <div class="thumbnail">
+          <img src="http://placehold.it/320x150" alt="">
+          <div class="caption">
+              <h4><%= link course.title, to: Routes.course_path(@conn, :show, course) %></a>
+              </h4>
+              <p><%= course.subtitle %></p>
+          </div>
+          
+      </div>
+  </div>
+    
+  <% end %>
+</div>

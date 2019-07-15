@@ -1,0 +1,25 @@
+<div class="box box-widget">
+    <div class="box-header with-border">
+        <h4 class="attachment-heading"><%= @node.title %></h4>
+        <div class="box-tools">
+            <%= render("_box_tools.html", assigns) %>
+        </div>
+    </div>
+    <div class="row box-body">
+        <div class="col-lg-4 left node-content">
+            <%= for content <- @node.content.left do %>
+                <%=  render_node_content(assigns, content) %>
+            <% end %>
+        </div>
+        <div class="col-lg-4 center node-content">
+            <%= for content <- @node.content.center do %>
+                <%=  render_node_content(assigns, content) %>
+            <% end %>
+        </div>
+        <div class="col-lg-4 right node-content">
+            <%= for content <- @node.content.right do %>
+                <%=  render_node_content(assigns, content) %>
+            <% end %>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<ul class="nav-tree">
+    <%= for chapter <- @course.chapters do %>
+      <li>
+      <%= link chapter.title, to: Routes.admin_course_chapter_path(@conn, :show, @course.id, chapter.id), class: "chapter-item #{active_class(@current_link, "chapter", chapter.id, "active")}" %>
+      <%= link to: Routes.admin_course_chapter_path(@conn, :edit, @course.id, chapter.id) do %>
+          <i class="fa fa-fw fa-edit"></i>
+      <% end %>
+        <ul>
+          <%= for section <- chapter.sections do %>
+            <li>
+              <%= link section.title, to: Routes.admin_course_chapter_section_path(@conn, :show, chapter.course_id, chapter.id, section.id), class: "section-item #{active_class(@current_link, "section", section.id, "active")}" %>
+              
+                <%= link to: Routes.admin_course_chapter_section_path(@conn, :edit, @course.id, chapter.id, section.id) do %>
+                  <i class="fa fa-fw fa-edit"></i>
+                <% end %>
+              
+            </li>
+          <% end %>
+          <%= link "Add new section",  to: Routes.admin_course_chapter_section_path(@conn, :new, @course.id, chapter.id), class: "btn btn-default btn-sm"  %>
+                
+        </ul>
+      </li>
+      <% end %>
+    <li><%= link "Add new chapter", to: Routes.admin_course_chapter_path(@conn, :new, @course), class: "btn btn-default btn-sm" %></li>
+  </ul>
